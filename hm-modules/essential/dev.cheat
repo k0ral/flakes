@@ -1,0 +1,78 @@
+% web, bookmark, documentation, reference, nix
+# NixOS wiki
+xdg-open https://nixos.wiki/
+
+# nixpkgs manual
+xdg-open https://nixos.org/manual/nixpkgs
+
+# NixOS manual
+xdg-open https://nixos.org/manual/nixos
+
+# nixpkgs package search
+xdg-open https://search.nixos.org/packages
+
+
+% web, bookmark, documentation, search, nix
+# Noogle
+xdg-open https://noogle.dev/
+
+
+% web, bookmark, documentation, explanation, programming, python
+# Python programming anti-patterns
+xdg-open https://docs.quantifiedcode.com/python-anti-patterns/
+
+# Hitchhiker’s Guide to Python
+xdg-open https://docs.python-guide.org/
+
+
+% web, bookmark, documentation, reference, programming, haskell
+# Hackage package repository
+xdg-open https://hackage.haskell.org/
+
+
+% web, bookmark, documentation, search, haskell
+# Hoogle
+xdg-open https://hoogle.haskell.org/
+
+
+% web, bookmark, documentation, explanation, programming
+# Connascence software quality
+xdg-open https://connascence.io/
+
+
+% web, bookmark, tool, golang
+# Go Playground
+xdg-open https://go.dev/play/
+
+# Golang packages
+xdg-open https://pkg.go.dev/
+
+
+% web, bookmark, documentation, reference, rust
+# Rust programming language book
+xdg-open https://doc.rust-lang.org/book/
+
+# The Cargo book
+xdg-open https://doc.rust-lang.org/cargo/
+
+# Asynchronous programming in Rust
+xdg-open https://rust-lang.github.io/async-book/
+
+# Packages/crates registry
+xdg-open https://crates.io/
+
+# Rust & WebAssembly
+xdg-open https://rustwasm.github.io/docs/book/
+
+
+% web, bookmark, documentation, howto, rust
+# Rust By Example book
+xdg-open https://doc.rust-lang.org/stable/rust-by-example/
+
+# Rust cookbook
+xdg-open https://rust-lang-nursery.github.io/rust-cookbook/
+
+
+% web, bookmark, dev
+# GitHub
+xdg-open https://github.com/

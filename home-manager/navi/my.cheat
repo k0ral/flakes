@@ -1,0 +1,235 @@
+% git
+
+# Update submodules
+git submodule update --init
+
+# Pull all submodules
+git submodule foreach git pull origin master
+
+# Recursively update submodules
+git submodule update --init --recursive
+
+
+% systemd, systemctl
+
+# Start service
+systemctl start <service_inactive>
+
+# Start user service
+systemctl --user start <service_user_inactive>
+
+# Stop service
+systemctl stop <service_active>
+
+# Stop user service
+systemctl --user stop <service_user_active>
+
+# Enable service
+systemctl enable <service_disabled>
+
+# Enable user service
+systemctl --user enable <service_user_disabled>
+
+# Disable service
+systemctl disable <service_enabled>
+
+# Disable user service
+systemctl --user disable <service_user_enabled>
+
+# Restart service
+systemctl restart <service>
+
+# Restart user service
+systemctl --user restart <service_user>
+
+# Reload service
+systemctl reload <service_active>
+
+# Reload user service
+systemctl --user reload <service_user_active>
+
+# Show service status
+systemctl status <service>
+
+# Show user service status
+systemctl --user status <service_user>
+
+# List running services
+systemctl list-units --type=service --state=running
+
+# List running user services
+systemctl --user list-units --type=service --state=running
+
+# List enabled services
+systemctl list-unit-files --type=service --state=enabled
+
+# List enabled user services
+systemctl --user list-unit-files --type=service --state=enabled
+
+# List disabled services
+systemctl list-unit-files --type=service --state=disabled
+
+# List disabled user services
+systemctl --user list-unit-files --type=service --state=disabled
+
+# Show service logs
+journalctl --unit <service>
+
+# Show user service logs
+journalctl --user-unit <service_user>
+
+
+$ service_inactive: systemctl list-units --type=service --state=inactive | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_active: systemctl list-units --type=service --state=active | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_enabled: systemctl list-unit-files --type=service --state=enabled | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_disabled: systemctl list-unit-files --type=service --state=disabled | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service: systemctl list-units --type=service --all | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_user: systemctl --user list-units --type=service --all | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_user_inactive: systemctl --user list-units --type=service --state=inactive | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_user_active: systemctl --user list-units --type=service --state=active | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_user_enabled: systemctl --user list-unit-files --type=service --state=enabled | awk '{print $1}' | grep .service | sed 's/.service$//'
+$ service_user_disabled: systemctl --user list-unit-files --type=service --state=disabled | awk '{print $1}' | grep .service | sed 's/.service$//'
+
+
+% nix
+
+# List reverse dependencies of a store derivation
+nix-store --query --referrers /nix/store/<derivation>
+
+# Browse all NixOS options
+man configuration.nix
+
+# Browse all home-manager options
+man home-configuration.nix
+
+$ derivation: ls /nix/store
+
+
+% ffmpeg, ffprobe
+
+# Re-encode video in Two-Pass ABR mode
+ffmpeg -y -i <file> -c:v libx265 -b:v 1500K -vf scale=-1:720 -x265-params pass=1 -an -f mp4 /dev/null
+ffmpeg -i <file> -c:v libx265 -b:v 1500K -vf scale=-1:720 -c:a copy -x265-params pass=2 output.mp4
+rm x265_2pass*
+
+# Re-encode video in Constant Rate Factor (CRF)
+ffmpeg -i <file> -c:v libx265 -vf scale=-1:720 -c:a copy -crf 24 output.mp4
+
+# Cut beginning of video
+ffmpeg -ss <timecode> -i <video_file> -acodec copy -vcodec copy -avoid_negative_ts make_zero new.(basename <video_file>); and mv -i new.(basename <video_file>) <video_file>
+
+# Cut end of video
+ffmpeg -i <video_file> -acodec copy -vcodec copy -to <timecode> new.(basename <video_file>); and mv -i new.(basename <video_file>) <video_file>
+
+# Print exact video duration
+ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 -sexagesimal <video_file>
+
+# Print exact video framerate
+ffprobe -v error -select_streams v:0 -show_entries stream=avg_frame_rate -of default=nw=1:nk=1 <video_file>
+
+# Print exact video resolution
+ffprobe -v error -select_streams v:0 -show_entries stream=height,width -of csv=s=x:p=0 <video_file>
+
+# List video files, sorted by exact duration
+ls -1 | loop -i 'ffprobe -v error -show_entries format=duration -of default=nw=1:nk=1 -sexagesimal "$ITEM" | tr -d "\n"; echo " $ITEM"' | sort -k1 -n
+
+# List video files with their bitrate
+ls -1 | loop -i 'ffprobe -v error -select_streams v:0 -show_entries stream=bit_rate -of default=nw=1:nk=1 -sexagesimal "$ITEM" | tr -d "\n"; echo " $ITEM";'
+
+
+% kubernetes
+
+# Set context
+kubectl config use-context <context>
+
+# Describe pod
+kubectl describe pod <pod>
+
+# Show logs of pod
+kubectl logs <pod>
+
+# Interactive shell access to a running pod
+kubectl exec --stdin --tty <pod> -- /bin/sh
+
+$ context: kubectl config get-contexts
+$ pod: kubectl get pods
+
+
+% adb, android
+
+# Get property
+adb -s <device> shell getprop <property>
+
+# Install APK
+adb -s <device> install -r <path>
+
+# Uninstall package
+adb -s <device> uninstall -r <package>
+
+# Clear user data for package
+adb -s <device> shell pm clear <package>
+
+# Dispatch a deep-link / open URI
+adb -s <device> shell am start <uri>
+
+$ device: adb devices --- --headers 1 --column 1
+
+
+% sway
+
+# Set mode to default
+swaymsg mode default
+
+# List screens
+swaymsg -t get_outputs
+
+
+% wayland
+
+# Take a screenshot of a part of the screen
+grim -g (slurp) <file>.png
+
+# Take a screenshot of a part of the screen and put the output into the clipboard
+grim -g (slurp) - | wl-copy
+
+
+% nmcli
+
+# List wifi networks
+nmcli d wifi list
+
+# Connect to wifi network
+nmcli d wifi connect <ssid> password <password>
+
+
+% dvdbackup
+
+# List DVD title sets
+dvdbackup -p -i /dev/sr0 -I
+
+# Rip DVD title set
+dvdbackup -p -i /dev/sr0 -o <destination> -T <title_set>
+
+
+% sane
+
+# Scan document
+scanimage -d "<device>" --resolution 150 -o <output_filename>
+
+$ device: scanimage -f "%d%n"
+
+% misc
+
+# Show ports set to LISTENING
+sudo netstat -tlnp
+
+# List open ports
+sudo lsof -Pan -i tcp -i udp
+
+# Limit CPU usage of process
+cpulimit --include-children --limit <n> --pid <pid>
+
+# Watch filesystem disk space usage
+watch -d -n1 df -h
+
+$ pid: (ps -o pid,%cpu,%mem,ni,cmd ax 2>/dev/null || ps -o pid,%cpu,%mem,ni,command) | sort -b -k3 -r | awk '{print $1, $2, $3, $4, $5}' | column -t --- --header-lines 1 --column 1

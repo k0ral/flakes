@@ -1,0 +1,17 @@
+% service, bookmark
+
+# CUPS
+xdg-open http://localhost:631
+
+# Paperless
+xdg-open http://localhost:8000
+
+# Nextcloud
+xdg-open http://localhost:8880
+
+# Wallabag
+xdg-open http://localhost:9999
+
+# Foundry
+xdg-open http://localhost:15000
+
