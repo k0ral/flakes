@@ -10,13 +10,14 @@
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
   boot.initrd.kernelModules = [ ];
+  boot.initrd.luks.devices.root.device = "/dev/disk/by-uuid/f29e21d3-eed8-4c13-91ff-9e23f1dc57f8";
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/cf2944e2-a7b2-4800-a263-5e5169a3a147";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/mapper/root";
+    fsType = "ext4";
+  };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/9EBE-19CB";
