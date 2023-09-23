@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       nixfmt
+      nix-search
       nurl
       rnix-lsp
       statix

@@ -3,13 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nix-search = {
+      url = "github:peterldowns/nix-search-cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager }:
+  outputs = { self, nixpkgs, nix-search, home-manager }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -27,6 +31,7 @@
 
       overlays.default = self: super: {
         nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
+        nix-search = nix-search.packages.${system}.nix-search;
         oauth2l = packages.${system}.oauth2l;
         quottit = packages.${system}.quottit;
         qwerty-fr = packages.${system}.qwerty-fr;
