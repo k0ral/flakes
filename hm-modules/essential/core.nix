@@ -46,7 +46,7 @@ in {
       la = "ls -la";
       less = "${pkgs.less}/bin/less -R";
       ll = "ls -l --icons";
-      ls = "${pkgs.exa}/bin/exa -g --group-directories-first";
+      ls = "${pkgs.eza}/bin/eza -g --group-directories-first";
       lsa = "ls -a";
       lsblk =
         "${pkgs.util-linuxCurses}/bin/lsblk -o NAME,LABEL,UUID,MODEL,SIZE,FSTYPE,MOUNTPOINT";
@@ -84,7 +84,7 @@ in {
         enable = true;
         nix-direnv.enable = true;
       };
-      exa.enable = true;
+      eza.enable = true;
       fzf.enable = true;
       home-manager.enable = true;
       man.enable = true;
