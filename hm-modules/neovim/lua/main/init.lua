@@ -67,7 +67,7 @@ require('Comment').setup()
 require('gitsigns').setup()
 
 -- Indent blankline
-require("indent_blankline").setup()
+require("ibl").setup()
 
 -- Leap
 require('leap').opts.highlight_unlabeled_phase_one_targets = true
