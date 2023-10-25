@@ -34,7 +34,7 @@ require "paq" {
   'nvim-lua/plenary.nvim';
   'nvim-lualine/lualine.nvim';
   'nvim-telescope/telescope.nvim';
-  {'nvim-treesitter/nvim-treesitter', run = 'TSUpdate'};
+  {'nvim-treesitter/nvim-treesitter', build = 'TSUpdate'};
   'marko-cerovac/material.nvim';
   'p00f/nvim-ts-rainbow';
   'purescript-contrib/purescript-vim';
