@@ -80,5 +80,15 @@
   };
   services.udiskie = {
     enable = true;
+    settings = {
+      device_config = [{
+        id_uuid = "f4082ec9-83d7-4813-848e-033d50891ff2";
+        keyfile = "${config.xdg.configHome}/secrets/bodhi.keyfile";
+      }
+      {
+        id_uuid = "3ead5fae-15e6-4282-8b5c-60feda55f1df";
+        keyfile = "${config.xdg.configHome}/secrets/gorion.keyfile";
+      }];
+    };
   };
 }
