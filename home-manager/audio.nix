@@ -1,8 +1,6 @@
 { config, pkgs ? import <nixpkgs> { }, ... }:
 
 {
-  imports = [ ./beets.nix ];
-
   home.packages = with pkgs; [
     chromaprint
     cmus
@@ -13,6 +11,11 @@
   module.audio.ncmpcpp = {
     enable = true;
     mpdMusicDir = "/home/music";
+  };
+
+  module.audio.beets = {
+    enable = true;
+    directory = "/home/music";
   };
 
   services.easyeffects.enable = true;

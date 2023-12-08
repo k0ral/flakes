@@ -8,6 +8,7 @@
   multimedia = ./essential/multimedia.nix;
   nix = ./essential/nix.nix;
 
+  beets = ./beets.nix;
   btop = ./btop.nix;
   compression = ./compression.nix;
   containers = ./containers.nix;
