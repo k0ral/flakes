@@ -31,13 +31,11 @@
       hledger
       hledger-ui
       # unipicker
-
-      # Communication
-      thunderbird
     ];
   };
 
   imports = [
+    ./apps.nix
     ./audio.nix
     ./console.nix
     ./dev.nix
@@ -45,7 +43,6 @@
     ./filesystem.nix
     ./gui.nix
     ./hardware.nix
-    ./modules/obsidian.nix
     ./modules/security.nix
     ./modules/wayland
     ./modules/web.nix
@@ -64,8 +61,6 @@
   module.essential.dev.enable = true;
   module.essential.multimedia.enable = true;
   module.essential.nix.enable = true;
-  module.ferdium.enable = true;
-  module.obsidian.enable = true;
   module.security.enable = true;
   module.utilities.compression.enable = true;
   module.utilities.trash.enable = true;

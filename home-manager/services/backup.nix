@@ -12,6 +12,7 @@ let
     "${config.home.homeDirectory}/prog/archive"
     "${config.home.homeDirectory}/services"
     "${config.home.homeDirectory}/.librewolf"
+    "${config.home.homeDirectory}/.local/share/shiori"
     "${config.home.homeDirectory}/.local/share/gtg"
     "${config.home.homeDirectory}/.password-store"
     "${config.home.homeDirectory}/.thunderbird"

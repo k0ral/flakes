@@ -2,9 +2,9 @@
 with lib;
 
 let
-  cfg = config.module.ferdium;
+  cfg = config.module.apps.ferdium;
 in {
-  options.module.ferdium = {
+  options.module.apps.ferdium = {
     enable = mkEnableOption "Ferdium module";
   };
 
