@@ -1,19 +1,10 @@
-{ config, pkgs ? import <nixpkgs> { }, ... }:
+{ config, lib, pkgs ? import <nixpkgs> { }, ... }:
 
 {
   module.cli.fish.enable = true;
-
-  programs = {
-    foot.enable = true;
-    foot.settings = {
-        main.shell = "fish --private";
-        main.font = "VictorMono Nerd Font:size=14";
-        main.bold-text-in-bright = "yes";
-        colors = {
-          alpha = 0.90;
-          background = "000022";
-        };
-    };
+  module.cli.foot = {
+    enable = true;
+    shell = "fish --private";
   };
 
   xdg.configFile."navi/cheats" = {

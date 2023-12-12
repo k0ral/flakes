@@ -15,6 +15,7 @@
   ferdium = ./ferdium.nix;
   ffmpeg = ./ffmpeg/default.nix;
   fish = ./fish.nix;
+  foot = ./foot.nix;
   fuzzel = ./fuzzel.nix;
   git = ./git.nix;
   golang = ./golang.nix;
