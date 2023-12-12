@@ -7,7 +7,6 @@
   programs = {
     adb.enable = true;
     dconf.enable = true;
-    fish.enable = true;
     iftop.enable = true;
     kdeconnect.enable = true;
     light.enable = true;
