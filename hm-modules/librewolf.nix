@@ -1,14 +1,10 @@
 { config, lib, pkgs ? import <nixpkgs> { }, ... }:
 with lib;
 
-let
-  cfg = config.module.web.librewolf;
+let cfg = config.module.web.librewolf;
 in {
   options.module.web.librewolf = {
     enable = mkEnableOption "Librewolf module";
-    username = mkOption {
-      type = types.str;
-    };
   };
 
   config = mkIf cfg.enable {
