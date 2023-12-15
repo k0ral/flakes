@@ -15,6 +15,5 @@
   ];
 
   module.btop.enable = true;
-
-  xdg.configFile."xkb/symbols/us_qwerty-fr".source = "${pkgs.qwerty-fr}/usr/share/X11/xkb/symbols/us_qwerty-fr";
+  module.hardware.us-qwerty-fr.enable = true;
 }

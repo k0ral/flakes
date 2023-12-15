@@ -26,4 +26,5 @@
   nixlang = ./nixlang.nix;
   python = ./python.nix;
   trash = ./trash.nix;
+  us-qwerty-fr = ./us-qwerty-fr.nix;
 }
