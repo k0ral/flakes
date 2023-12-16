@@ -63,6 +63,13 @@ global.strip_whitespace_on_save = true
 -- Comment
 require('Comment').setup()
 
+-- Fidget
+require("fidget").setup{
+  notification = {
+    override_vim_notify = true
+  }
+}
+
 -- Git signs
 require('gitsigns').setup()
 
@@ -150,9 +157,6 @@ require('lualine').setup {
 -- Mini
 require('mini.cursorword').setup()
 
--- Notify
-vim.notify = require("notify")
-
 -- Null-ls
 local null_ls = require("null-ls")
 local sources = {
@@ -170,7 +174,7 @@ null_ls.setup({ sources = sources })
 global.rainbow_active = true
 
 -- Telescope
-require("telescope").load_extension("notify")
+require("telescope")
 
 -- Tree-sitter
 require('nvim-treesitter.configs').setup {

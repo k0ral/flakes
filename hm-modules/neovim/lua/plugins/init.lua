@@ -18,6 +18,7 @@ require "paq" {
   'hrsh7th/nvim-cmp';
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-nvim-lsp-signature-help';
+  'j-hui/fidget.nvim';
   'jose-elias-alvarez/null-ls.nvim';
   'kyazdani42/nvim-web-devicons';
   'L3MON4D3/LuaSnip';
@@ -39,7 +40,6 @@ require "paq" {
   'p00f/nvim-ts-rainbow';
   'purescript-contrib/purescript-vim';
   'ray-x/go.nvim';
-  'rcarriga/nvim-notify';
   'romgrk/barbar.nvim';
   'saadparwaiz1/cmp_luasnip';
   'stevearc/dressing.nvim';
