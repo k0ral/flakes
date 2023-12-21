@@ -19,6 +19,7 @@ require "paq" {
   'hrsh7th/cmp-nvim-lsp';
   'hrsh7th/cmp-nvim-lsp-signature-help';
   'j-hui/fidget.nvim';
+  'johmsalas/text-case.nvim';
   'jose-elias-alvarez/null-ls.nvim';
   'kyazdani42/nvim-web-devicons';
   'L3MON4D3/LuaSnip';
@@ -26,10 +27,10 @@ require "paq" {
   'lewis6991/gitsigns.nvim';
   'lukas-reineke/indent-blankline.nvim';
   'mbbill/undotree';
+  'mcauley-penney/tidy.nvim';
   'mickael-menu/zk-nvim';
   'neovim/nvim-lspconfig';
   'neovimhaskell/haskell-vim';
-  'ntpeters/vim-better-whitespace';
   'numToStr/Comment.nvim';
   'nvim-lua/popup.nvim';
   'nvim-lua/plenary.nvim';

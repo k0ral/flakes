@@ -54,12 +54,6 @@ cmd 'colorscheme material'
 -- Plugin specific
 --
 
--- Better whitespace
-global.better_whitespace_enabled = false
-global.strip_only_modified_lines = true
-global.strip_whitespace_confirm = false
-global.strip_whitespace_on_save = true
-
 -- Comment
 require('Comment').setup()
 
@@ -175,6 +169,12 @@ global.rainbow_active = true
 
 -- Telescope
 require("telescope")
+
+-- Text-case
+require('textcase').setup()
+
+-- Tidy
+require("tidy").setup()
 
 -- Tree-sitter
 require('nvim-treesitter.configs').setup {
