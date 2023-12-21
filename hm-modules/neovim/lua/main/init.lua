@@ -107,10 +107,6 @@ lsp.rnix.setup {
   capabilities = capabilities,
 }
 
--- require("zk").setup({
---   picker = "telescope",
--- })
-
 -- Auto-completion
 local cmp = require("cmp")
 cmp.setup {
@@ -193,7 +189,6 @@ require('nvim-treesitter.configs').setup {
     "json",
     "lua",
     "nix",
-    "r",
     "python",
     "rust",
     "terraform",
