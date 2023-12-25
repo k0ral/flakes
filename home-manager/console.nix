@@ -1,10 +1,10 @@
 { config, lib, pkgs ? import <nixpkgs> { }, ... }:
 
 {
-  module.cli.fish.enable = true;
+  module.cli.nushell.enable = true;
   module.cli.foot = {
     enable = true;
-    shell = "fish --private";
+    shell = "nu";
   };
 
   xdg.configFile."navi/cheats" = {

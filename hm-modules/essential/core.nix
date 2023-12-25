@@ -32,40 +32,6 @@ in {
       wget
     ];
 
-    home.shellAliases = {
-      cat = "${pkgs.bat}/bin/bat";
-      chmod = "chmod -c --preserve-root";
-      cp = "${pkgs.rsync}/bin/rsync -av --progress";
-      diff = "${pkgs.diffutils}/bin/diff --color=always";
-      df = "${pkgs.lfs}/bin/dysk";
-      dmesg = "${pkgs.util-linuxCurses}/bin/dmesg -T";
-      E = "sudoedit";
-      find = "${pkgs.fd}/bin/fd";
-      free = "${pkgs.procps}/bin/free -h";
-      grep = "${pkgs.ripgrep}/bin/rg --hidden -g '!.git/'";
-      la = "ls -la";
-      less = "${pkgs.less}/bin/less -R";
-      ll = "ls -l --icons";
-      ls = "${pkgs.eza}/bin/eza -g --group-directories-first";
-      lsa = "ls -a";
-      lsblk =
-        "${pkgs.util-linuxCurses}/bin/lsblk -o NAME,LABEL,UUID,MODEL,SIZE,FSTYPE,MOUNTPOINT";
-      mkdir = "mkdir -p -v";
-      mv = "mv -v";
-      ping = "${pkgs.prettyping}/bin/prettyping --nolegend";
-      rename = "${pkgs.util-linuxCurses}/bin/rename -v";
-      o = "${pkgs.xdg-utils}/bin/xdg-open";
-      pstree = "${pkgs.pstree}/bin/pstree -p -T -a";
-      rm = "rm -v";
-      s = "sudo";
-      sshfs = "${pkgs.sshfs}/bin/sshfs -o follow_symlinks";
-      sys = "${pkgs.systemd}/bin/systemctl";
-      syslog = "${pkgs.systemd}/bin/journalctl --follow -u";
-      syslogu = "${pkgs.systemd}/bin/journalctl --follow --user-unit";
-      sysu = "${pkgs.systemd}/bin/systemctl --user";
-      watch = "${pkgs.procps}/bin/watch -c";
-      wget = "${pkgs.wget}/bin/wget -c";
-    };
 
     news.display = "silent";
 
@@ -84,7 +50,6 @@ in {
         enable = true;
         nix-direnv.enable = true;
       };
-      eza.enable = true;
       fzf.enable = true;
       home-manager.enable = true;
       man.enable = true;

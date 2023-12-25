@@ -24,6 +24,7 @@
   ncmpcpp = ./ncmpcpp.nix;
   neovim = ./neovim/default.nix;
   nixlang = ./nixlang.nix;
+  nushell = ./nushell.nix;
   python = ./python.nix;
   trash = ./trash.nix;
   us-qwerty-fr = ./us-qwerty-fr.nix;

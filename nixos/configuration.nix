@@ -128,7 +128,7 @@
       "wheel"
     ];
     isNormalUser = true;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     uid = 1000;
   };
 

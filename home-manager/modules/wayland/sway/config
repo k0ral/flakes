@@ -6,7 +6,7 @@
 set $alt Mod1
 set $mod Mod4
 set $term foot
-set $shell /run/current-system/sw/bin/fish --private
+set $shell /run/current-system/sw/bin/nu
 set $lock swaylock --screenshots --clock --indicator --effect-blur 20x5 --effect-vignette 0.5:0.5 --grace 2 --fade-in 2
 set $browser librewolf --new-window
 
