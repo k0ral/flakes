@@ -5,8 +5,6 @@ lua require("main")
 au BufNewFile,BufRead *.nix set filetype=nix
 
 " Commands
-command! ConfigOpen edit $MYVIMRC
-command! ConfigReload source $MYVIMRC
 command! LspCapabilities lua print(vim.inspect(vim.lsp.buf_get_clients()[1].server_capabilities))
 command! LspCodeActions lua vim.lsp.buf.code_action()
 command! LspDefinitions Telescope lsp_definitions
