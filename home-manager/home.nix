@@ -1,4 +1,4 @@
-{ config, lib, pkgs ? import <nixpkgs> { }, ... }:
+{ config, lib, pkgs ? import <nixpkgs> { }, user_id, ... }:
 
 {
   home = {
@@ -7,7 +7,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       FZF_DEFAULT_COMMAND = "fd --type f";
-      XDG_RUNTIME_DIR = "/run/user/$UID";
+      XDG_RUNTIME_DIR = "/run/user/${builtins.toString user_id}";
     };
     shellAliases.e = config.home.sessionVariables.EDITOR;
     stateVersion = "21.05";

@@ -15,6 +15,7 @@
 
   outputs = { self, nixpkgs, nix-search, home-manager }:
     let
+      user_id = 1000;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         config.allowUnfree = true;
@@ -41,12 +42,12 @@
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs; };
+        specialArgs = { inherit pkgs; inherit user_id; };
         modules = [
           ./nixos/configuration.nix
           home-manager.nixosModules.home-manager
           {
-            home-manager.extraSpecialArgs = { inherit pkgs; };
+            home-manager.extraSpecialArgs = { inherit pkgs; inherit user_id; };
             home-manager.sharedModules = nixpkgs.lib.attrValues hm-modules;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;

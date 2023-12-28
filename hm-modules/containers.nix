@@ -15,7 +15,7 @@ in {
       lazydocker
     ];
 
-    home.sessionVariables.DOCKER_HOST = "unix://$XDG_RUNTIME_DIR/podman/podman.sock";
+    home.sessionVariables.DOCKER_HOST = "unix://${config.home.sessionVariables.XDG_RUNTIME_DIR}/podman/podman.sock";
     home.shellAliases.dc = "docker-compose";
   };
 }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, user_id, ... }: {
   imports = [
     ./hardware-configuration.nix
     ./programs.nix
@@ -129,7 +129,7 @@
     ];
     isNormalUser = true;
     shell = pkgs.nushell;
-    uid = 1000;
+    uid = user_id;
   };
 
   virtualisation.podman = {
