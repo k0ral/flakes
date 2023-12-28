@@ -20,6 +20,7 @@
   git = ./git.nix;
   golang = ./golang.nix;
   haskell = ./haskell.nix;
+  kubernetes = ./kubernetes.nix;
   mpv = ./mpv.nix;
   ncmpcpp = ./ncmpcpp.nix;
   neovim = ./neovim/default.nix;
