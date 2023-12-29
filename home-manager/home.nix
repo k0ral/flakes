@@ -19,7 +19,6 @@
       yank
 
       # Filesystem
-      detox
       rpi-imager
 
       # GUI
@@ -61,6 +60,7 @@
   module.essential.dev.enable = true;
   module.essential.multimedia.enable = true;
   module.essential.nix.enable = true;
+  module.programs.detox.enable = true;
   module.security.enable = true;
   module.utilities.compression.enable = true;
   module.utilities.trash.enable = true;

@@ -12,6 +12,7 @@
   btop = ./btop.nix;
   compression = ./compression.nix;
   containers = ./containers.nix;
+  detox = ./detox.nix;
   ferdium = ./ferdium.nix;
   ffmpeg = ./ffmpeg/default.nix;
   fish = ./fish.nix;
