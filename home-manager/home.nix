@@ -37,6 +37,7 @@
   imports = [
     ./apps.nix
     ./audio.nix
+    ./browser.nix
     ./console.nix
     ./dev.nix
     ./experimental.nix
@@ -45,7 +46,6 @@
     ./hardware.nix
     ./modules/security.nix
     ./modules/wayland
-    ./modules/web.nix
     ./network.nix
     ./services/backup.nix
     ./services/cleanup.nix
@@ -65,7 +65,6 @@
   module.utilities.compression.enable = true;
   module.utilities.trash.enable = true;
   module.wayland.enable = true;
-  module.web.enable = true;
 
   services.pueue = {
     enable = true;
