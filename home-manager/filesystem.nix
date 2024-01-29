@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    du-dust
     dua
     ipfs
     libnotify
@@ -10,5 +9,5 @@
     udiskie
   ];
 
-  home.shellAliases.du = "dust";
+  home.shellAliases.du = "dua i";
 }
