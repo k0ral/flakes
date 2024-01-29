@@ -31,6 +31,7 @@
       hm-modules = import ./hm-modules;
 
       overlays.default = self: super: {
+        i-umount = packages.${system}.i-umount;
         nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
         nix-search = nix-search.packages.${system}.nix-search;
         oauth2l = packages.${system}.oauth2l;
