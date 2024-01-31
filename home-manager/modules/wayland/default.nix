@@ -12,6 +12,7 @@ in {
       clipman
       grim
       imv
+      iswaymsg
       lswt
       river
       rofimoji

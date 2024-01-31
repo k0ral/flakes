@@ -8,7 +8,7 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "i-umount";
+  pname = "iudiskie";
   version = "1.0.0";
   src = ./.;
 
@@ -19,12 +19,12 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
-    install -D run.nu $out/bin/i-umount
-    wrapProgram $out/bin/i-umount --prefix PATH : ${lib.makeBinPath [ fzf jq nushell udiskie ]}
+    install -D run.nu $out/bin/iudiskie-umount
+    wrapProgram $out/bin/iudiskie-umount --prefix PATH : ${lib.makeBinPath [ fzf jq nushell udiskie ]}
   '';
 
   meta = with lib; {
-    description = "Interactively mount filesystems";
+    description = "Interactive wrapper around udiskie";
     maintainers = with maintainers; [ koral ];
     platforms = platforms.linux;
   };
