@@ -35,6 +35,7 @@
         iswaymsg = packages.${system}.iswaymsg;
         nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
         nix-search = nix-search.packages.${system}.nix-search;
+        clipboard-utils = packages.${system}.clipboard-utils;
         oauth2l = packages.${system}.oauth2l;
         quottit = packages.${system}.quottit;
         qwerty-fr = packages.${system}.qwerty-fr;
