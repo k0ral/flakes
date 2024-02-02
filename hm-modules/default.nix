@@ -21,6 +21,7 @@
   git = ./git.nix;
   golang = ./golang.nix;
   haskell = ./haskell.nix;
+  i3status-rust = ./i3status-rust.nix;
   kubernetes = ./kubernetes.nix;
   mpv = ./mpv.nix;
   ncmpcpp = ./ncmpcpp.nix;
@@ -28,6 +29,7 @@
   nixlang = ./nixlang.nix;
   nushell = ./nushell.nix;
   python = ./python.nix;
+  sway = ./sway.nix;
   trash = ./trash.nix;
   us-qwerty-fr = ./us-qwerty-fr.nix;
 }

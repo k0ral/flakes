@@ -21,6 +21,11 @@ in {
       blocks = [
       {
         block = "service_status";
+        service = "searx";
+        active_format = "🔵";
+        inactive_format = " 🔴 searx ";
+      }{
+        block = "service_status";
         service = "privoxy";
         active_format = "🔵";
         inactive_format = " 🔴 privoxy ";
