@@ -43,6 +43,10 @@ in {
 
     services = {
       dunst.enable = true;
+      dunst.settings = {
+        global.font = "VictorMono Nerd Font 14";
+        global.width = "(0, 1000)";
+      };
       gammastep.enable = true;
       gammastep.dawnTime = "6:00-7:45";
       gammastep.duskTime = "18:35-20:15";
