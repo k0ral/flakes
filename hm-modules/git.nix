@@ -53,35 +53,19 @@ in {
           background = "dark";
         };
         extraConfig = {
-          color = {
-            ui = "auto"; # covers diff = true, status = auto, branch = auto
-            interactive = "auto";
-          };
-          core = {
-            # editor = "neovide --nofork +startinsert";
-            editor = "nvim +startinsert";
-          };
-          commit = {
-            template = "~/.config/git/gitmessage";
-            verbose = true;
-          };
-          push = {
-            autoSetupRemote = true;
-            default = "simple";
-          };
-          pull = {
-            ff = "only";
-            rebase = true;
-          };
-          merge = { tool = "nvimdiff"; };
-          mergetool = {
-            nvimdiff = {
-              cmd =
-                "nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
-            };
-          };
-          rebase = { autosquash = true; };
-          diff = { noprefix = true; };
+          color.ui = "auto"; # covers diff = true, status = auto, branch = auto
+          color.interactive = "auto";
+          core.editor = "nvim +startinsert";
+          commit.template = "~/.config/git/gitmessage";
+          commit.verbose = true;
+          push.autoSetupRemote = true;
+          push.default = "simple";
+          pull.ff = "only";
+          pull.rebase = true;
+          merge.tool = "nvimdiff";
+          mergetool.nvimdiff.cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
+          rebase.autosquash = true;
+          diff.noprefix = true;
         } // cfg.extraConfig;
       };
       gitui.enable = true;
