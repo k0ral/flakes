@@ -15,7 +15,6 @@ in {
       file
       inetutils
       ldns
-      lfs
       lsof
       moreutils
       nmap
@@ -23,7 +22,6 @@ in {
       ripgrep
       rmlint
       rsync
-      sd
       smartmontools
       sshfs-fuse
       usbutils
@@ -31,7 +29,6 @@ in {
       xdg_utils
       wget
     ];
-
 
     news.display = "silent";
 

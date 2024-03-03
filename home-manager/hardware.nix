@@ -8,7 +8,6 @@
     light
     lm_sensors
     powertop
-    procs
     ps_mem
     psmisc
     upower

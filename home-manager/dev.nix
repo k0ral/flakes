@@ -22,7 +22,6 @@
 
     # CSV
     csvs-to-sqlite
-    csvkit
 
     # Dhall
     dhall-json

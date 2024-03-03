@@ -21,6 +21,8 @@ in {
       configFile.text = ''
         hide http
         def ll [...args: string] { ls -l ($args | str join) | select name type target mode user group size created accessed modified | sort-by type }
+        def df [...args: string] { sys | get disks }
+        def sed [...args: string] { echo "use `str replace` instead of `sed`" }
 
         $env.config = {
           show_banner: false
@@ -62,7 +64,6 @@ in {
         chmod = "chmod -c --preserve-root";
         cp = "cp -p -v";
         diff = "${pkgs.diffutils}/bin/diff --color=always";
-        df = "${pkgs.lfs}/bin/dysk";
         dmesg = "${pkgs.util-linuxCurses}/bin/dmesg -T";
         E = "sudoedit";
         find = "${pkgs.fd}/bin/fd";
