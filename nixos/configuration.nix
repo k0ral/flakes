@@ -10,7 +10,6 @@
     kernelModules = [ "coretemp" "k10temp" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
-    supportedFilesystems = [ "zfs" ];
     tmp.cleanOnBoot = true;
   };
 
