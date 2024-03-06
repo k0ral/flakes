@@ -58,6 +58,7 @@ in {
           core.editor = "nvim +startinsert";
           commit.template = "~/.config/git/gitmessage";
           commit.verbose = true;
+          diff.algorithm = "histogram";
           push.autoSetupRemote = true;
           push.default = "simple";
           pull.ff = "only";
@@ -65,6 +66,8 @@ in {
           merge.tool = "nvimdiff";
           mergetool.nvimdiff.cmd = "nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'";
           rebase.autosquash = true;
+          rebase.autostash = true;
+          rerere.enabled = true;
           diff.noprefix = true;
         } // cfg.extraConfig;
       };
