@@ -169,6 +169,10 @@ in {
         foot iswaymsg-output-enable
         foot iudiskie-umount
         foot select-sink
+        systemctl hibernate
+        systemctl poweroff
+        systemctl reboot
+        systemctl suspend
         udiskie-mount -a
       '';
     };
