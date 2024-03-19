@@ -158,6 +158,7 @@ local sources = {
   null_ls.builtins.formatting.black,
   null_ls.builtins.formatting.jq,
   null_ls.builtins.formatting.nixfmt,
+  null_ls.builtins.formatting.buf,
 }
 
 null_ls.setup({ sources = sources })
