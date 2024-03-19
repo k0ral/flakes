@@ -105,9 +105,6 @@ lsp.marksman.setup {
 lsp.pyright.setup {
   capabilities = capabilities,
 }
-lsp.rust_analyzer.setup {
-  capabilities = capabilities,
-}
 lsp.rnix.setup {
   capabilities = capabilities,
 }
