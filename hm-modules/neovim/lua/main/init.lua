@@ -102,8 +102,16 @@ lsp.hls.setup {
 lsp.marksman.setup {
   capabilities = capabilities,
 }
-lsp.pyright.setup {
+lsp.pylsp.setup{
   capabilities = capabilities,
+  settings = {
+    pylsp = {
+      plugins = {
+        pylint = { enabled = true },
+        ruff = { formatEnabled = false },
+      }
+    }
+  }
 }
 lsp.rnix.setup {
   capabilities = capabilities,
@@ -154,8 +162,6 @@ local null_ls = require("null-ls")
 local sources = {
   null_ls.builtins.code_actions.statix,
   null_ls.builtins.diagnostics.golangci_lint,
-  null_ls.builtins.formatting.isort,
-  null_ls.builtins.formatting.black,
   null_ls.builtins.formatting.jq,
   null_ls.builtins.formatting.nixfmt,
   null_ls.builtins.formatting.buf,
