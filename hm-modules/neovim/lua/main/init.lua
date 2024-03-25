@@ -89,9 +89,8 @@ for type, icon in pairs(signs) do
 end
 
 
-lsp.java_language_server.setup {
+lsp.jdtls.setup {
   capabilities = capabilities,
-  cmd = { "java-language-server" },
 }
 lsp.gopls.setup {
   capabilities = capabilities,
