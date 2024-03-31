@@ -8,6 +8,9 @@
   multimedia = ./essential/multimedia.nix;
   nix = ./essential/nix.nix;
 
+  fuzzel = ./wayland/fuzzel.nix;
+  i3status-rust = ./wayland/i3status-rust.nix;
+  sway = ./wayland/sway.nix;
   beets = ./beets.nix;
   btop = ./btop.nix;
   compression = ./compression.nix;
@@ -17,11 +20,9 @@
   ffmpeg = ./ffmpeg/default.nix;
   fish = ./fish.nix;
   foot = ./foot.nix;
-  fuzzel = ./fuzzel.nix;
   git = ./git.nix;
   golang = ./golang.nix;
   haskell = ./haskell.nix;
-  i3status-rust = ./i3status-rust.nix;
   kubernetes = ./kubernetes.nix;
   mpv = ./mpv.nix;
   ncmpcpp = ./ncmpcpp.nix;
@@ -29,7 +30,6 @@
   nixlang = ./nixlang.nix;
   nushell = ./nushell.nix;
   python = ./python.nix;
-  sway = ./sway.nix;
   trash = ./trash.nix;
   us-qwerty-fr = ./us-qwerty-fr.nix;
 }
