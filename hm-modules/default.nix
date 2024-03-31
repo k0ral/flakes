@@ -11,6 +11,8 @@
   fuzzel = ./wayland/fuzzel.nix;
   i3status-rust = ./wayland/i3status-rust.nix;
   sway = ./wayland/sway.nix;
+  wallit = ./wayland/wallit.nix;
+
   beets = ./beets.nix;
   btop = ./btop.nix;
   compression = ./compression.nix;

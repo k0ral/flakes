@@ -40,6 +40,7 @@ in {
 
     module.wayland.fuzzel.enable = true;
     module.wayland.sway.enable = true;
+    module.wayland.wallit.enable = true;
 
     services = {
       dunst.enable = true;

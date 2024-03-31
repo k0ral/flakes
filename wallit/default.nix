@@ -18,7 +18,8 @@ rec {
   '';
 
   wallit = pkgs.writeShellScriptBin "wallit" ''
+    echo "Using WAYLAND_DISPLAY=$WAYLAND_DISPLAY"
     ${wallhaven-tags}/bin/wallhaven-tags
-    ${pkgs.sway}/bin/swaymsg output '*' bg /tmp/wallpaper stretch
+    ${pkgs.swaybg}/bin/swaybg -m stretch -o "*" -i /tmp/wallpaper
   '';
 }

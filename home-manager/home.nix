@@ -49,7 +49,6 @@
     ./services/backup.nix
     ./services/cleanup.nix
     ./services/wallabag.nix
-    ./services/wallpaper.nix
     ./video.nix
   ];
 
