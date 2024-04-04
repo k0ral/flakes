@@ -19,7 +19,6 @@ in {
       swappy
       swaybg
       swaylock-effects
-      waybar
       wdisplays
       wev
       wl-clipboard
@@ -39,8 +38,9 @@ in {
     };
 
     module.wayland.fuzzel.enable = true;
-    module.wayland.sway.enable = true;
+    module.wayland.hyprland.enable = true;
     module.wayland.wallit.enable = true;
+    module.wayland.waybar.enable = true;
 
     services = {
       dunst.enable = true;
@@ -70,6 +70,23 @@ in {
         }];
       };
       swayidle.enable = true;
+    };
+
+    xdg.configFile = {
+      "wayland/commands".text = ''
+        clipboard-notify
+        clipboard-qrencode
+        rofimoji --action type copy --selector wmenu --selector-args="" --clipboarder wl-copy --typer wtype
+        foot ihyprctl-output-disable
+        foot ihyprctl-output-enable
+        foot iudiskie-umount
+        foot select-sink
+        systemctl hibernate
+        systemctl poweroff
+        systemctl reboot
+        systemctl suspend
+        udiskie-mount -a
+      '';
     };
   };
 }

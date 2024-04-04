@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  hyprutils = pkgs.callPackage ./hyprutils { };
   iswaymsg = pkgs.callPackage ./iswaymsg { };
   iudiskie = pkgs.callPackage ./iudiskie { };
   clipboard-utils = pkgs.callPackage ./clipboard-utils { };

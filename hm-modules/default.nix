@@ -10,8 +10,10 @@
 
   fuzzel = ./wayland/fuzzel.nix;
   i3status-rust = ./wayland/i3status-rust.nix;
+  hyprland = ./wayland/hyprland.nix;
   sway = ./wayland/sway.nix;
   wallit = ./wayland/wallit.nix;
+  waybar = ./wayland/waybar.nix;
 
   beets = ./beets.nix;
   btop = ./btop.nix;

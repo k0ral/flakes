@@ -11,9 +11,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hypraise = {
+      url = "github:knarkzel/raise";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nix-search, home-manager }:
+  outputs = { self, nixpkgs, nix-search, home-manager, hypraise }:
     let
       user_id = 1000;
       system = "x86_64-linux";
@@ -31,7 +35,9 @@
       hm-modules = import ./hm-modules;
 
       overlays.default = self: super: {
+        hypraise = hypraise.defaultPackage.${system};
         iudiskie = packages.${system}.iudiskie;
+        hyprutils = packages.${system}.hyprutils;
         iswaymsg = packages.${system}.iswaymsg;
         nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
         nix-search = nix-search.packages.${system}.nix-search;

@@ -17,5 +17,7 @@
       set tabstospaces
       set tabsize 2
     '';
+    hyprland.enable = true;
+    hyprland.xwayland.enable = false;
   };
 }
