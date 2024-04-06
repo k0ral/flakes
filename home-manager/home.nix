@@ -3,7 +3,8 @@
 {
   home = {
     username = "koral";
-    homeDirectory = "/home/koral";
+    homeDirectory = "/home/${config.home.username}";
+    sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
     sessionVariables = {
       EDITOR = "nvim";
       FZF_DEFAULT_COMMAND = "fd --type f";
