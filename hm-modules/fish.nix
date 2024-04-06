@@ -34,10 +34,6 @@ in {
       ];
 
       shellInit = ''
-        function cd
-            builtin cd $argv; and ls
-        end
-
         function up
             for i in (seq 1 $argv)
               cd ..
@@ -72,6 +68,7 @@ in {
       pstree = "${pkgs.pstree}/bin/pstree -p -T -a";
       rm = "rm -v";
       s = "sudo";
+      sed = ''echo "use sd"'';
       sshfs = "${pkgs.sshfs}/bin/sshfs -o follow_symlinks";
       syslog = "${pkgs.systemd}/bin/journalctl -u";
       syslogu = "${pkgs.systemd}/bin/journalctl --user-unit";
