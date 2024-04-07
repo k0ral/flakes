@@ -57,7 +57,7 @@ in
           "$mod, mouse:273, resizewindow"
         ];
         bind = [
-          ''$mod, Print, exec, /bin/sh -c 'grim -t ppm -s 1 -g "$(slurp)" - | swappy -f -' ''
+          '', Print, exec, /bin/sh -c 'grim -t ppm -s 1 -g "$(slurp)" - | swappy -f -' ''
           "$mod, Return, exec, foot"
           "$mod, Tab, cyclenext,"
           "$mod SHIFT, Tab, cyclenext, prev"
