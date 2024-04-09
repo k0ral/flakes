@@ -11,6 +11,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       golangci-lint
+      golangci-lint-langserver
       gopls
       gotestsum
       mockgen

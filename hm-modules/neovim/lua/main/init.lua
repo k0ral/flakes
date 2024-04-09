@@ -92,6 +92,9 @@ end
 lsp.jdtls.setup {
   capabilities = capabilities,
 }
+lsp.golangci_lint_ls.setup{
+  capabilities = capabilities,
+}
 lsp.gopls.setup {
   capabilities = capabilities,
 }
@@ -160,7 +163,6 @@ require('mini.cursorword').setup()
 local null_ls = require("null-ls")
 local sources = {
   null_ls.builtins.code_actions.statix,
-  null_ls.builtins.diagnostics.golangci_lint,
   null_ls.builtins.formatting.jq,
   null_ls.builtins.formatting.nixfmt,
   null_ls.builtins.formatting.buf,
