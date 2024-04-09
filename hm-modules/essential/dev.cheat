@@ -11,6 +11,12 @@ xdg-open https://nixos.org/manual/nixos
 # nixpkgs package search
 xdg-open https://search.nixos.org/packages
 
+# nixpkgs repository
+xdg-open https://github.com/NixOS/nixpkgs
+
+# home-manager repository
+xdg-open https://github.com/nix-community/home-manager
+
 
 % web, bookmark, documentation, search, nix
 # Noogle
@@ -23,6 +29,9 @@ xdg-open https://docs.quantifiedcode.com/python-anti-patterns/
 
 # Hitchhiker’s Guide to Python
 xdg-open https://docs.python-guide.org/
+
+# Pypi packages repository
+xdg-open https://pypi.org/
 
 
 % web, bookmark, documentation, reference, programming, haskell
