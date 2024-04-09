@@ -3,6 +3,7 @@
 {
   home.packages = with pkgs; [
     croc
+    logseq
     obsidian
     shiori
     thunderbird

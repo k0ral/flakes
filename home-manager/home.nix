@@ -27,7 +27,6 @@
       # inkscape
 
       # Utils
-      gtg
       hledger
       hledger-ui
       # unipicker
