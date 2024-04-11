@@ -25,11 +25,6 @@
       # GUI
       giara
       # inkscape
-
-      # Utils
-      hledger
-      hledger-ui
-      # unipicker
     ];
   };
 
