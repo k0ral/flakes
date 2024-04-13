@@ -4,7 +4,7 @@
   module.cli.nushell.enable = true;
   module.cli.foot = {
     enable = true;
-    shell = "nu";
+    shell = "nu --no-history";
   };
 
   xdg.configFile."navi/cheats" = {

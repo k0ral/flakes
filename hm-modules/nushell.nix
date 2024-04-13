@@ -20,7 +20,7 @@ in {
 
       configFile.text = ''
         hide http
-        def ll [...args: string] { ls -l ($args | str join) | select name type target mode user group size created accessed modified | sort-by type }
+        def ll [pattern: string = "."] { ls -l $pattern | reject inode num_links readonly | sort-by type }
         def df [...args: string] { sys | get disks }
         def sed [...args: string] { echo "use `str replace` instead of `sed`" }
 
@@ -52,7 +52,7 @@ in {
             mode: emacs
             event: [{
               send: executehostcommand,
-              cmd: "commandline -a (fzf)"
+              cmd: "commandline -i (fzf)"
             }]
           }]
         }
