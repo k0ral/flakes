@@ -28,32 +28,30 @@
         system = system;
       };
     in rec {
-      packages.${system} = import ./packages { inherit pkgs; }
-        // import ./quottit { inherit pkgs; }
-        // import ./wallit { inherit pkgs; };
+      packages.${system} = import ./packages { inherit pkgs; };
 
       hm-modules = import ./hm-modules;
 
       overlays.default = self: super: {
+        clipboard-utils = packages.${system}.clipboard-utils;
         hypraise = hypraise.defaultPackage.${system};
         iudiskie = packages.${system}.iudiskie;
         hyprutils = packages.${system}.hyprutils;
         iswaymsg = packages.${system}.iswaymsg;
         nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
         nix-search = nix-search.packages.${system}.nix-search;
-        clipboard-utils = packages.${system}.clipboard-utils;
         oauth2l = packages.${system}.oauth2l;
-        quottit = packages.${system}.quottit;
+        quottit = packages.${system}.quottit.quottit;
         qwerty-fr = packages.${system}.qwerty-fr;
         statusbar-utils = packages.${system}.statusbar-utils;
-        wallit = packages.${system}.wallit;
+        wallit = packages.${system}.wallit.wallit;
       };
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {
         inherit system;
         specialArgs = { inherit pkgs; inherit user_id; };
         modules = [
-          ./nixos/configuration.nix
+          ./mystix/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.extraSpecialArgs = { inherit pkgs; inherit user_id; };
