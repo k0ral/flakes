@@ -1,19 +1,34 @@
-{ config, pkgs, user_id, ... }: {
+{ config, inputs, outputs, pkgs, user_id, ... }: {
   imports = [
     ./hardware-configuration.nix
     ./programs.nix
     ./services.nix
     ./wayland.nix
+
+    outputs.modules.nixos.base
+    outputs.modules.nixos.ntfs
+
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager.extraSpecialArgs = { inherit pkgs user_id; };
+      home-manager.sharedModules = pkgs.lib.attrValues outputs.modules.home ++ [
+        inputs.sops-nix.homeManagerModules.sops
+      ];
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.koral = import ../home-manager/home.nix;
+    }
   ];
 
+  module.nixos.base.enable = true;
+  module.nixos.ntfs.enable = true;
+
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     kernelModules = [ "coretemp" "k10temp" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
-    tmp.cleanOnBoot = true;
   };
-
-  console.keyMap = "us";
 
   environment.variables = { };
 
@@ -55,42 +70,22 @@
       driSupport32Bit = true;
     };
 
-    pulseaudio.enable = false;
     sane.enable = true;
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
-
   networking = {
     firewall.allowedTCPPorts = [ 873 5232 6600 9090 15000 ];
-    firewall.enable = true;
-    enableIPv6 = true;
     hostId = "01ed4135";
     hostName = "mystix";
     networkmanager.enable = true;
   };
 
   nix = {
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    gc = {
-      automatic = true;
-      dates = "daily";
-      options = "--delete-older-than 10d";
-    };
-    package = pkgs.nixFlakes;
-    settings = {
-      auto-optimise-store = true;
-      sandbox = true;
-      substituters = [ "https://cache.nixos.org/" ];
-      trusted-users = [ "@wheel" ];
-    };
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    nixPath = ["nixpkgs=flake:nixpkgs"];
   };
 
-  powerManagement = { cpuFreqGovernor = "ondemand"; };
-
-  programs.fuse.userAllowOther = true;
+  powerManagement.cpuFreqGovernor = "ondemand";
 
   security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.swaylock = { };
@@ -108,9 +103,6 @@
       });
     '';
   };
-  security.sudo.execWheelOnly = true;
-
-  system.autoUpgrade.enable = false;
 
   time.timeZone = "Europe/Paris";
 

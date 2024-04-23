@@ -40,21 +40,12 @@
   };
 
   services.gvfs.enable = true;
-  services.journald.extraConfig = "SystemMaxUse=100M";
   services.logind.extraConfig = ''
     HandlePowerKey=ignore
     HandleSuspendKey=ignore
     HandleHibernateKey=ignore
     HandleLidSwitch=ignore
   '';
-
-  services.openssh = {
-    enable = true;
-    startWhenNeeded = true;
-    extraConfig = ''
-      X11Forwarding no
-    '';
-  };
 
   services.pipewire = {
     enable = true;

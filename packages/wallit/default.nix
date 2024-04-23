@@ -1,25 +1,33 @@
-{ pkgs, ... }:
+{ lib
+, stdenv
+, makeWrapper
+, aria2
+, httpie
+, jq
+, nushell
+, swaybg
+, yq
+}:
 
-rec {
-  wallhaven-tags = pkgs.writeShellScriptBin "wallhaven-tags" ''
-    TAG=$(${pkgs.coreutils}/bin/cat ''${XDG_CONFIG_HOME:-~/.config}/secrets/wallhaven.yaml | ${pkgs.yq}/bin/yq ".tags[]" | ${pkgs.coreutils}/bin/shuf -n1)
+stdenv.mkDerivation rec {
+  pname = "wallit";
+  version = "2.0.0";
+  src = ./.;
 
-    URL=$(${pkgs.httpie}/bin/http GET "https://wallhaven.cc/api/v1/search" "categories==101" "purity==100" "sorting==random" "atleast==1920x1080" "ratios==16x9" "q==id:$TAG" | ${pkgs.jq}/bin/jq -r ".data[0].path")
-    ${pkgs.coreutils}/bin/rm -r /tmp/wallpaper
-    echo "Downloading $URL"
-    ${pkgs.aria2}/bin/aria2c -d /tmp -o wallpaper "$URL"
+  dontConfigure = true;
+  dontBuild = true;
+
+  buildInputs = [ aria2 httpie jq nushell swaybg yq ];
+  nativeBuildInputs = [ makeWrapper ];
+
+  installPhase = ''
+    install -D wallit.nu $out/bin/wallit
+    wrapProgram $out/bin/wallit --prefix PATH : ${lib.makeBinPath buildInputs}
   '';
 
-  wallhaven-random = pkgs.writeShellScriptBin "wallhaven-random" ''
-    URL=$(${pkgs.httpie}/bin/http GET "https://wallhaven.cc/api/v1/search" "categories==101" "purity==100" "sorting==random" "atleast==1920x1080" "ratios==16x9" | ${pkgs.jq}/bin/jq -r ".data[0].path")
-    ${pkgs.coreutils}/bin/rm -r /tmp/wallpaper
-    echo "Downloading $URL"
-    ${pkgs.aria2}/bin/aria2c -d /tmp -o wallpaper "$URL"
-  '';
-
-  wallit = pkgs.writeShellScriptBin "wallit" ''
-    echo "Using WAYLAND_DISPLAY=$WAYLAND_DISPLAY"
-    ${wallhaven-tags}/bin/wallhaven-tags
-    ${pkgs.swaybg}/bin/swaybg -m stretch -o "*" -i /tmp/wallpaper
-  '';
+  meta = with lib; {
+    description = "Set random wallpaper";
+    maintainers = with maintainers; [ koral ];
+    platforms = platforms.linux;
+  };
 }

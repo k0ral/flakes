@@ -5,8 +5,8 @@
   iswaymsg = pkgs.callPackage ./iswaymsg { };
   iudiskie = pkgs.callPackage ./iudiskie { };
   oauth2l = pkgs.callPackage ./oauth2l.nix { };
-  quottit = import ./quottit { inherit pkgs; };
+  quottit = pkgs.callPackage ./quottit { };
   qwerty-fr = pkgs.callPackage ./qwerty-fr.nix { };
   statusbar-utils = pkgs.callPackage ./statusbar-utils.nix { };
-  wallit = import ./wallit { inherit pkgs; };
+  wallit = pkgs.callPackage ./wallit { };
 }

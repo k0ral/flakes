@@ -2,13 +2,18 @@
   description = "Personal flakes, including NixOS & home-manager configuration";
 
   inputs = {
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nix-search = {
       url = "github:peterldowns/nix-search-cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hypraise = {
@@ -17,49 +22,40 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-search, home-manager, hypraise }:
+  outputs = inputs@{ self, home-manager, nixos-hardware, nixpkgs, nix-search, sops-nix, hypraise }:
     let
+      inherit (self) outputs;
       user_id = 1000;
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         config.allowUnfree = true;
-        config.pulseaudio = true; # TODO: false
         overlays = [ self.overlays.default ];
         system = system;
       };
     in rec {
       packages.${system} = import ./packages { inherit pkgs; };
 
-      hm-modules = import ./hm-modules;
+      modules = import ./modules;
 
-      overlays.default = self: super: {
-        clipboard-utils = packages.${system}.clipboard-utils;
+      overlays.default = final: prev: import ./packages { pkgs = final; } // {
         hypraise = hypraise.defaultPackage.${system};
-        iudiskie = packages.${system}.iudiskie;
-        hyprutils = packages.${system}.hyprutils;
-        iswaymsg = packages.${system}.iswaymsg;
-        nerdfonts = super.nerdfonts.override { fonts = [ "VictorMono" ]; };
+        nerdfonts = prev.nerdfonts.override { fonts = [ "VictorMono" ]; };
         nix-search = nix-search.packages.${system}.nix-search;
-        oauth2l = packages.${system}.oauth2l;
-        quottit = packages.${system}.quottit.quottit;
-        qwerty-fr = packages.${system}.qwerty-fr;
-        statusbar-utils = packages.${system}.statusbar-utils;
-        wallit = packages.${system}.wallit.wallit;
       };
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs; inherit user_id; };
+        specialArgs = { inherit pkgs inputs outputs user_id; };
         modules = [
           ./mystix/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.extraSpecialArgs = { inherit pkgs; inherit user_id; };
-            home-manager.sharedModules = nixpkgs.lib.attrValues hm-modules;
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.koral = import ./home-manager/home.nix;
-          }
+        ];
+      };
+
+      nixosConfigurations.regis = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
+        modules = pkgs.lib.attrValues modules.nixos ++ [
+          ./regis/configuration.nix
         ];
       };
     };
