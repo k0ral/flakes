@@ -52,7 +52,7 @@ in {
             mode: emacs
             event: [{
               send: executehostcommand,
-              cmd: "commandline -i (fzf)"
+              cmd: "commandline edit -i (fzf)"
             }]
           }]
         }
