@@ -83,8 +83,8 @@ in
           ''$mod SHIFT, F, exec, ${pkgs.hypraise}/bin/raise --class firefox --launch firefox''
           "$mod, L, exec, swaylock --screenshots --clock --indicator --effect-blur 20x5 --effect-vignette 0.5:0.5 --grace 2 --fade-in 2"
           ''$mod SHIFT, L, exec, ${pkgs.hypraise}/bin/raise --class Logseq --launch logseq''
-          "$mod SHIFT, M, exec, ${run_cmus}"
-          "$mod SHIFT, M, togglespecialworkspace, cmus"
+          "$mod, M, exec, ${run_cmus}"
+          "$mod, M, togglespecialworkspace, cmus"
           ''$mod, O, exec, foot -a navi sh -c "sleep 0.01 && navi --tag-rules=bookmark"''
           ''$mod, P, exec, /bin/sh -c '$(sort ~/.config/wayland/commands | ${pkgs.wmenu}/bin/wmenu -f "Victor Mono Nerd Font 16" -l10 -p "command:")' ''
           "$mod, R, exec, fuzzel"
@@ -112,7 +112,6 @@ in
         windowrulev2 = [
           "workspace special:cmus, class:^(cmus)$"
           "workspace special:navi, class:^(navi)$"
-          "workspace name:firefox, class:^(firefox)$"
           "workspace name:logseq, class:^(Logseq)$"
           "workspace name:thunderbird, class:^(thunderbird)$"
         ];
