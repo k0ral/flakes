@@ -67,6 +67,7 @@ in {
         user_rules = [
           "@@||app.datadoghq.eu^"
           "@@||static.datadoghq.com^"
+          "@@||docs.datadoghq.com^"
           "@@||facebook.com^"
           "@@||xx.fbcdn.net^"
         ];
