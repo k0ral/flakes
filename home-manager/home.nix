@@ -14,9 +14,6 @@
     stateVersion = "21.05";
 
     packages = with pkgs; [
-      # Console
-      loop
-      # ncurses.dev
       yank
 
       # Filesystem
@@ -60,12 +57,6 @@
   module.utilities.trash.enable = true;
   module.wayland.enable = true;
 
-  services.pueue = {
-    enable = true;
-    settings = {
-      shared = {};
-    };
-  };
   services.udiskie = {
     enable = true;
     settings = {
