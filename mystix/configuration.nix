@@ -1,12 +1,10 @@
-{ config, inputs, outputs, pkgs, user_id, ... }: {
+{ config, inputs, outputs, network, pkgs, user_id, ... }: {
   imports = [
     ./hardware-configuration.nix
     ./programs.nix
     ./services.nix
     ./wayland.nix
-
-    outputs.modules.nixos.base
-    outputs.modules.nixos.ntfs
+    ./wireguard.nix
 
     inputs.home-manager.nixosModules.home-manager
     {
@@ -18,6 +16,7 @@
       home-manager.useUserPackages = true;
       home-manager.users.koral = import ../home-manager/home.nix;
     }
+    inputs.sops-nix.nixosModules.sops
   ];
 
   module.nixos.base.enable = true;
@@ -101,6 +100,11 @@
           }
       });
     '';
+  };
+
+  sops = {
+    defaultSopsFile = ../secrets/personal.yaml;
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
   };
 
   time.timeZone = "Europe/Paris";

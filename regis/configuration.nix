@@ -4,6 +4,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     inputs.sops-nix.nixosModules.sops
+    ./wireguard.nix
   ];
 
   fileSystems = {
@@ -25,11 +26,6 @@
   };
   module.nixos.home-assistant = {
     enable = true;
-  };
-  module.nixos.wireguard = {
-    enable = true;
-    externalInterface = "end0";
-    privateKeyFile = config.sops.secrets."wireguard/private-key".path;
   };
 
   networking = {
@@ -53,7 +49,6 @@
     defaultSopsFile = ../secrets/personal.yaml;
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     secrets = {
-      "wireguard/private-key" = { };
       "users/koral/hashed-password".neededForUsers = true;
       "wireless.env" = {};
     };

@@ -32,6 +32,7 @@
         overlays = [ self.overlays.default ];
         system = system;
       };
+      network = import ./network.nix;
     in rec {
       packages.${system} = import ./packages { inherit pkgs; };
 
@@ -45,15 +46,15 @@
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit pkgs inputs outputs user_id; };
-        modules = [
+        specialArgs = { inherit pkgs inputs outputs network user_id; };
+        modules = pkgs.lib.attrValues modules.nixos ++ [
           ./mystix/configuration.nix
         ];
       };
 
       nixosConfigurations.regis = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs network; };
         modules = pkgs.lib.attrValues modules.nixos ++ [
           ./regis/configuration.nix
         ];

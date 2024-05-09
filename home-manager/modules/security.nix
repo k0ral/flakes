@@ -10,7 +10,9 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      age
       pass
+      sops
     ];
 
     programs.gpg.enable = true;
