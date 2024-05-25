@@ -43,7 +43,7 @@ in {
             mode: emacs
             event: [{
               send: executehostcommand,
-              cmd: "commandline -r (navi --print)"
+              cmd: "commandline edit -r (navi --print)"
             }]
           },{
             name: fzf_file_path_fzf

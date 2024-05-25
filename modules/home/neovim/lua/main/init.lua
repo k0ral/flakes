@@ -16,7 +16,6 @@ opt.inccommand = 'split'
 opt.list = true
 opt.listchars = 'tab:▸ ,trail:·'
 opt.number = true
-opt.pastetoggle = '<F12>'
 opt.showmatch = true
 opt.shiftwidth = 2
 opt.showmode = false

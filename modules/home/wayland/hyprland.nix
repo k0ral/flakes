@@ -6,7 +6,7 @@ let
   run_cmus = pkgs.writeScript "run_cmus" ''
     #!${pkgs.nushell}/bin/nu
 
-    if (${pkgs.lswt}/bin/lswt -j | from json | where "app_id" == "cmus" | is-empty) {
+    if (${pkgs.lswt}/bin/lswt -j | from json | get toplevels | where "app-id" == "cmus" | is-empty) {
       ${pkgs.libnotify}/bin/notify-send "Running for the first time..."
       ${pkgs.foot}/bin/foot -a cmus -e /bin/sh -c cmus
     }
@@ -25,8 +25,8 @@ in
       xwayland.enable = false;
       settings = {
         "$mod" = "SUPER";
-        general = {
-          cursor_inactive_timeout = 10;
+        cursor = {
+          inactive_timeout = 0;
         };
         input = {
           kb_layout = "us_qwerty-fr";

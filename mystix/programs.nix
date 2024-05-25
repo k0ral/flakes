@@ -6,12 +6,12 @@
   programs = {
     adb.enable = true;
     dconf.enable = true;
+    hyprland.enable = true;
+    hyprland.xwayland.enable = false;
     iftop.enable = true;
     kdeconnect.enable = true;
     light.enable = true;
     mosh.enable = true;
     mtr.enable = true;
-    hyprland.enable = true;
-    hyprland.xwayland.enable = false;
   };
 }
