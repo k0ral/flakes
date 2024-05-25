@@ -1,50 +1,74 @@
-{ config, lib, pkgs ? import <nixpkgs> { }, ... }:
+{ config, lib, pkgs ? import <nixpkgs> { }, network, ... }:
 
-let
-  borg-paths = [
-    "${config.home.homeDirectory}/digital-garden"
-    "${config.home.homeDirectory}/doc"
-    "${config.home.homeDirectory}/finance"
-    "${config.home.homeDirectory}/flakes"
-    "${config.home.homeDirectory}/foundry"
-    "${config.home.homeDirectory}/images"
-    "${config.home.homeDirectory}/logseq"
-    "${config.home.homeDirectory}/papers"
-    "${config.home.homeDirectory}/prog/archive"
-    "${config.home.homeDirectory}/services"
-    "${config.home.homeDirectory}/.librewolf"
-    "${config.home.homeDirectory}/.local/share/shiori"
-    "${config.home.homeDirectory}/.password-store"
-    "${config.home.homeDirectory}/.thunderbird"
-    "${config.xdg.configHome}"
-  ];
-  backupScript = pkgs.writeShellScriptBin "backup" ''
-    export BORG_PASSCOMMAND="${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/secrets/borg-passphrase"
-    REPOSITORY=$(${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/secrets/borg-repository)
-
-    ${pkgs.borgbackup}/bin/borg create --remote-path=borg1 -x -C lzma "$REPOSITORY:backup::{utcnow}-{hostname}" ${lib.strings.concatStringsSep " " borg-paths}
-    ${pkgs.borgbackup}/bin/borg prune --remote-path=borg1 -d 30 "$REPOSITORY:backup"
-  '';
-in {
+{
   home.packages = with pkgs; [ borgbackup ];
 
-  systemd.user.services.backup = {
-    Unit.Description = "Backup";
-    Install.WantedBy = [ "default.target" ];
+  programs.borgmatic = {
+    enable = true;
+    backups.main = {
+      location = {
+        sourceDirectories = [
+          "${config.home.homeDirectory}/age-of-ashes"
+          "${config.home.homeDirectory}/digital-garden"
+          "${config.home.homeDirectory}/doc"
+          "${config.home.homeDirectory}/finance"
+          "${config.home.homeDirectory}/flakes"
+          "${config.home.homeDirectory}/foundry"
+          "${config.home.homeDirectory}/images"
+          "${config.home.homeDirectory}/logseq"
+          "${config.home.homeDirectory}/papers"
+          "${config.home.homeDirectory}/prog/archive"
+          "${config.home.homeDirectory}/services"
+          "${config.home.homeDirectory}/.gnupg"
+          "${config.home.homeDirectory}/.local/share/shiori"
+          "${config.home.homeDirectory}/.mozilla"
+          "${config.home.homeDirectory}/.password-store"
+          "${config.home.homeDirectory}/.thunderbird"
+          "${config.xdg.configHome}"
+        ];
+        repositories = [{
+          path = "ssh://17994@ch-s011.rsync.net/./backup";
+          label = "rsync.net";
+        }];
+        extraConfig = {
+          remote_path = "borg1";
+        };
+      };
+      retention.keepDaily = 30;
+      storage.encryptionPasscommand = ''
+        ${pkgs.coreutils}/bin/cat ${config.xdg.configHome}/sops-nix/secrets/rsync.net/borg-passphrase
+      '';
+      hooks.extraConfig.ntfy = {
+        topic = "borgmatic";
+        server = "http://${network.homeLAN.regis.ipv4}:9876";
 
-    Service = {
-      ExecStart = [ "-${backupScript}/bin/backup" ];
-
-      Type = "oneshot";
+        start = {
+            title = "A borgmatic backup started";
+            message = "Watch this space...";
+            tags = "borgmatic";
+            priority = "min";
+        };
+        finish = {
+            title = "A borgmatic backup completed successfully";
+            message = "Nice!";
+            tags = "borgmatic,+1";
+            priority = "min";
+        };
+        fail = {
+            title = "A borgmatic backup failed";
+            message = "You should probably fix it";
+            tags = "borgmatic,-1,skull";
+            priority = "max";
+        };
+        states = ["start" "finish" "fail" ];
+      };
     };
   };
 
-  systemd.user.timers.backup = {
-    Install.WantedBy = [ "timers.target" ];
-
-    Timer = {
-      Unit = "backup.service";
-      OnCalendar = "daily";
-    };
+  services.borgmatic = {
+    enable = true;
+    frequency = "daily";
   };
+
+  sops.secrets."rsync.net/borg-passphrase" = {};
 }

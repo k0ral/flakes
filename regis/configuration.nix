@@ -1,4 +1,4 @@
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, outputs, network, ... }:
 
 {
   imports = [
@@ -19,22 +19,29 @@
   module.nixos.adguardhome = {
     enable = true;
     interface = "end0";
-    gateway_ip = "192.168.1.254";
-    subnet_mask = "255.255.255.0";
+    gateway_ip = network.homeLAN.gateway.ipv4;
+    subnet_mask = network.homeLAN.subnetMask;
     range_start = "192.168.1.200";
     range_end = "192.168.1.251";
   };
   module.nixos.home-assistant = {
     enable = true;
   };
+  module.nixos.ntfy = {
+    enable = true;
+    host = network.homeLAN.regis.ipv4;
+    port = 9876;
+  };
 
   networking = {
-    defaultGateway = "192.168.1.254";
+    defaultGateway = network.homeLAN.gateway.ipv4;
     hostName = "regis";
-    interfaces.end0.ipv4.addresses = [{
-      address = "192.168.1.11";
-      prefixLength = 24;
-    }];
+    interfaces.end0 = {
+      ipv4.addresses = [{
+        address = network.homeLAN.regis.ipv4;
+        prefixLength = 24;
+      }];
+    };
     wireless = {
       enable = false;
       environmentFile = config.sops.secrets."wireless.env".path;

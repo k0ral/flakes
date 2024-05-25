@@ -8,7 +8,7 @@
 
     inputs.home-manager.nixosModules.home-manager
     {
-      home-manager.extraSpecialArgs = { inherit pkgs user_id; };
+      home-manager.extraSpecialArgs = { inherit pkgs network user_id; };
       home-manager.sharedModules = pkgs.lib.attrValues outputs.modules.home ++ [
         inputs.sops-nix.homeManagerModules.sops
       ];

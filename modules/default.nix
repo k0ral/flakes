@@ -44,5 +44,6 @@
     base = ./nixos/base.nix;
     home-assistant = ./nixos/home-assistant.nix;
     ntfs = ./nixos/ntfs.nix;
+    ntfy = ./nixos/ntfy.nix;
   };
 }
