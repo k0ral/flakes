@@ -23,6 +23,7 @@
   module.nixos.ntfs.enable = true;
 
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
     kernelModules = [ "coretemp" "k10temp" ];
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = false;
