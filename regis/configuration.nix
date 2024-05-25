@@ -26,6 +26,7 @@
   };
   module.nixos.home-assistant = {
     enable = true;
+    ntfyAddress = "http://127.0.0.1:${builtins.toString config.module.nixos.ntfy.port}";
   };
   module.nixos.ntfy = {
     enable = true;

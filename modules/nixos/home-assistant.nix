@@ -5,6 +5,7 @@ let cfg = config.module.nixos.home-assistant;
 in {
   options.module.nixos.home-assistant = {
     enable = mkEnableOption "Home Assistant module";
+    ntfyAddress = mkOption { type = types.str; };
   };
 
   config = mkIf cfg.enable {
@@ -16,10 +17,19 @@ in {
     services.home-assistant = {
       enable = true;
       openFirewall = true;
+      customComponents = [
+        pkgs.home-assistant-custom-components.ntfy
+      ];
       config = {
         # Includes dependencies for a basic setup
         # https://www.home-assistant.io/integrations/default_config/
         default_config = { };
+
+        homeassistant.allowlist_external_dirs = [ "/hass-media" ];
+
+        shell_command = {
+          expose_media = "chmod -R a+rw /hass-media";
+        };
 
         mqtt = [{
           siren = {
@@ -61,7 +71,17 @@ in {
             encryption = "tls";
             username = "!secret my-mail";
             password = "!secret smtp-password";
-          }];
+          }
+          {
+            name = "ntfy";
+            platform = "ntfy";
+            topic = "home-assistant";
+            url = cfg.ntfyAddress;
+            verify_ssl = false;
+            allow_topic_override = true;
+            #attachment_maxsize: 300K
+          }
+        ];
 
         alarm_control_panel = [{
           platform = "manual";
@@ -84,6 +104,10 @@ in {
               service = "notify.mail_myself";
               data.title = "Door sensor has low battery";
               data.message = "TODO: add link";
+            }{
+              service = "notify.ntfy";
+              data.title = "Door sensor has low battery";
+              data.message = "TODO: add link";
             }];
           }
 
@@ -102,6 +126,10 @@ in {
             }];
             action = [{
               service = "notify.mail_myself";
+              data.title = "Siren has low battery while alarm is armed";
+              data.message = "TODO: add link";
+            }{
+              service = "notify.ntfy";
               data.title = "Siren has low battery while alarm is armed";
               data.message = "TODO: add link";
             }];
@@ -191,28 +219,68 @@ in {
               to = "triggered";
             }];
             action = [{
+              service = "camera.snapshot";
+              target.entity_id = "camera.camera1_fluent";
+              data.filename = "/hass-media/alarm-triggered.jpg";
+            }{
+              service = "shell_command.expose_media";
+            }{
               service = "notify.mail_myself";
               data.title = "Home alarm has been TRIGGERED";
               data.message = "TODO: add link";
-            }
-              {
-                service = "notify.mail_significant_other";
-                data.title = "Home alarm has been TRIGGERED";
-                data.message = "TODO: add link";
-              }
-              {
-                service = "light.turn_on";
-                target.entity_id = "light.camera1_floodlight";
-                data.brightness = 255;
-              }
-              {
-                service = "siren.turn_on";
-                target.entity_id = "siren.camera1_siren";
-              }
-              {
-                service = "siren.turn_on";
-                target.entity_id = "siren.heiman_siren";
-              }];
+            }{
+              service = "notify.mail_significant_other";
+              data.title = "Home alarm has been TRIGGERED";
+              data.message = "TODO: add link";
+            }{
+              service = "notify.ntfy";
+              data = {
+                title = "Home alarm has been TRIGGERED";
+                data = {
+                  attach_file = "/hass-media/alarm-triggered.jpg";
+                };
+              };
+            }{
+              service = "light.turn_on";
+              target.entity_id = "light.camera1_floodlight";
+              data.brightness = 255;
+            }{
+              service = "siren.turn_on";
+              target.entity_id = "siren.camera1_siren";
+            }{
+              service = "siren.turn_on";
+              target.entity_id = "siren.heiman_siren";
+            }];
+          }
+
+          {
+            alias = "Send snapshot when alarm is armed and motion is detected";
+            trigger = [{
+              platform = "state";
+              entity_id = "binary_sensor.camera1_motion";
+              from = "off";
+              to = "on";
+            }];
+            condition = [{
+              condition = "state";
+              entity_id = "alarm_control_panel.home_alarm";
+              state = "armed_away";
+            }];
+            action = [{
+              service = "camera.snapshot";
+              target.entity_id = "camera.camera1_fluent";
+              data.filename = "/hass-media/home-assistant-motion.jpg";
+            }{
+              service = "shell_command.expose_media";
+            }{
+              service = "notify.ntfy";
+              data = {
+                title = "Motion detected at home";
+                data = {
+                  attach_file = "/hass-media/home-assistant-motion.jpg";
+                };
+              };
+            }];
           }
 
           {
@@ -222,11 +290,27 @@ in {
               entity_id = "alarm_control_panel.home_alarm";
               to = "disarmed";
             }];
-            action = [{
-              service = "notify.mail_myself";
-              data.title = "Home alarm has been DISARMED";
-              data.message = "TODO: add link";
-            }
+            action = [
+              {
+                service = "camera.snapshot";
+                target.entity_id = "camera.camera1_fluent";
+                data.filename = "/hass-media/alarm-disarmed.jpg";
+              }{
+                service = "shell_command.expose_media";
+              }{
+                service = "notify.mail_myself";
+                data = {
+                  title = "Home alarm has been DISARMED";
+                  data = {
+                    attach_file = "/hass-media/alarm-disarmed.jpg";
+                  };
+                };
+              }
+              {
+                service = "notify.ntfy";
+                data.title = "Home alarm has been DISARMED";
+                data.message = "TODO: add link";
+              }
               {
                 service = "light.turn_off";
                 target.entity_id = "light.camera1_floodlight";
@@ -293,5 +377,9 @@ in {
       owner = "hass";
       path = "${config.services.home-assistant.configDir}/secrets.yaml";
     };
+
+    systemd.tmpfiles.rules = [
+      "d /hass-media 0777 hass hass"
+    ];
   };
 }
