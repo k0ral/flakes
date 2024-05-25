@@ -22,6 +22,7 @@ in {
       ripgrep
       rmlint
       rsync
+      sd
       smartmontools
       sshfs-fuse
       usbutils

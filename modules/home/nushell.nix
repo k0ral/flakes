@@ -22,7 +22,7 @@ in {
         hide http
         def ll [pattern: string = "."] { ls -l $pattern | reject inode num_links readonly | sort-by type }
         def df [...args: string] { sys | get disks }
-        def sed [...args: string] { echo "use `str replace` instead of `sed`" }
+        def sed [...args: string] { echo "use `sd` or `str replace` instead of `sed`" }
 
         $env.config = {
           show_banner: false
