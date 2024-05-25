@@ -78,6 +78,7 @@ in
           "$mod SHIFT, up, movewindow, u"
           "$mod SHIFT, down, movewindow, d"
 
+          ''$mod, E, exec, rofimoji --action type copy --selector fuzzel --selector-args="" --clipboarder wl-copy --typer wtype''
           ''$mod, F, togglefloating, active''
           ''$mod, F, pin, active''
           ''$mod SHIFT, F, exec, ${pkgs.hypraise}/bin/raise --class firefox --launch firefox''
