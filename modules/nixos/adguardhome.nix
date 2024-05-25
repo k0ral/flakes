@@ -65,6 +65,7 @@ in {
           }];
         theme = "dark";
         user_rules = [
+          "@@||api.datadoghq.eu^"
           "@@||app.datadoghq.eu^"
           "@@||static.datadoghq.com^"
           "@@||docs.datadoghq.com^"
