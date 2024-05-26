@@ -88,7 +88,9 @@ in {
           name = "Home alarm";
           code_arm_required = false;
           disarm_after_trigger = true;
+          arming_time = 0;
           delay_time = 0;
+          trigger_time = 300;
         }];
 
         automation = [
