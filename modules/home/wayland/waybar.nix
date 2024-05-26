@@ -20,7 +20,7 @@ in
           spacing = 4;
           modules-left = [ "hyprland/workspaces" "privacy" "custom/cmus" ];
           # modules-center = [ "sway/window" "custom/hello-from-waybar" ];
-          modules-right = [ "network#wireless" "network#wired" "disk" "memory" "cpu" "temperature" "backlight" "wireplumber" "battery" "clock" "tray" ];
+          modules-right = [ "network#wireless" "network#wired" "disk" "memory" "cpu" "temperature" "temperature#cpu" "backlight" "wireplumber" "battery" "clock" "tray" ];
           backlight = {
             format = "💡 {percent}%";
           };
@@ -58,13 +58,13 @@ in
           "network#wireless" = {
             interface = "wlo1";
             interval = 7;
-            format = "🛜 {essid} {signalStrength}% {ipaddr} 🔺{bandwidthDownBytes} 🔻{bandwidthUpBytes}";
+            format = "🛜 {essid} {signalStrength}% {ipaddr} 🔻{bandwidthDownBytes} 🔺{bandwidthUpBytes}";
             format-disconnected = "";
           };
           "network#wired" = {
             interface = "enp2s0";
             interval = 7;
-            format = "🌐 {ipaddr} 🔺{bandwidthDownBytes} 🔻{bandwidthUpBytes}";
+            format = "🌐 {ipaddr} 🔻{bandwidthDownBytes} 🔺{bandwidthUpBytes}";
             format-disconnected = "";
           };
           privacy = {
@@ -91,6 +91,10 @@ in
           };
           temperature = {
             format = "🌡️ {temperatureC}°C";
+          };
+          "temperature#cpu" = {
+            hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
+            format = "🌡️ CPU {temperatureC}°C";
           };
           wireplumber = {
             format = "🔊 {volume}%";
@@ -148,11 +152,30 @@ in
           border-top: 2px solid #c9545d;
         }
 
+        #workspaces button {
+          padding: 0 4px;
+          background-color: rgba(0,0,0,0.3);
+        }
+
+        #workspaces button:hover {
+        }
+
+        #workspaces button.focused {
+          /*    box-shadow: inset 0 -2px #c9545d; */
+          background-color: rgba(0,0,0,0.3);
+          color:#c9545d;
+          border-top: 2px solid #c9545d;
+        }
+
+        #workspaces button.urgent {
+          background-color: #eb4d4b;
+        }
+
         #clock, #battery, #cpu, #memory, #disk, #temperature, #backlight, #network, #wireplumber, #tray, #mode, #idle_inhibitor {
           margin: 2px;
           padding-left: 4px;
           padding-right: 4px;
-          background-color: rgba(0,0,0,0.3);
+          background-color: rgba(0,0,0,0.5);
           color: #ffffff;
         }
 
@@ -164,6 +187,72 @@ in
         /* If workspaces is the rightmost module, omit right margin */
         .modules-right > widget:last-child > #workspaces {
           margin-right: 0;
+        }
+
+        #clock {
+          font-weight: bold;
+        }
+
+        #battery icon {
+          color: red;
+        }
+
+        #battery.charging, #battery.plugged {
+          color: #ffffff;
+          background-color: #26A65B;
+        }
+
+        @keyframes blink {
+          to {
+            background-color: #ffffff;
+            color: #000000;
+          }
+        }
+
+        #battery.warning:not(.charging) {
+          background-color: #f53c3c;
+          color: #ffffff;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+        }
+
+        #battery.critical:not(.charging) {
+          background-color: #f53c3c;
+          color: #ffffff;
+          animation-name: blink;
+          animation-duration: 0.5s;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+          animation-direction: alternate;
+        }
+
+        label:focus {
+          background-color: #000000;
+        }
+
+        #network.disconnected {
+          background-color: #f53c3c;
+        }
+
+        #temperature.critical {
+          background-color: #eb4d4b;
+        }
+
+        #idle_inhibitor.activated {
+          background-color: #ecf0f1;
+          color: #2d3436;
+        }
+
+        #tray > .passive {
+          -gtk-icon-effect: dim;
+        }
+
+        #tray > .needs-attention {
+          -gtk-icon-effect: highlight;
+          background-color: #eb4d4b;
         }
       '';
       systemd.enable = true;
