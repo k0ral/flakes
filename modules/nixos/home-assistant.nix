@@ -238,6 +238,7 @@ in {
               service = "notify.ntfy";
               data = {
                 title = "Home alarm has been TRIGGERED";
+                message = "TODO: add link";
                 data = {
                   attach_file = "/hass-media/alarm-triggered.jpg";
                 };
@@ -278,6 +279,7 @@ in {
               service = "notify.ntfy";
               data = {
                 title = "Motion detected at home";
+                message = "TODO: add link";
                 data = {
                   attach_file = "/hass-media/home-assistant-motion.jpg";
                 };
@@ -292,43 +294,43 @@ in {
               entity_id = "alarm_control_panel.home_alarm";
               to = "disarmed";
             }];
-            action = [
-              {
-                service = "camera.snapshot";
-                target.entity_id = "camera.camera1_fluent";
-                data.filename = "/hass-media/alarm-disarmed.jpg";
-              }{
-                service = "shell_command.expose_media";
-              }{
-                service = "notify.mail_myself";
-                data = {
-                  title = "Home alarm has been DISARMED";
+            action = [{
+              parallel = [{
+                sequence = [{
+                  service = "camera.snapshot";
+                  target.entity_id = "camera.camera1_fluent";
+                  data.filename = "/hass-media/alarm-disarmed.jpg";
+                }{
+                  service = "shell_command.expose_media";
+                }{
+                  service = "notify.mail_myself";
                   data = {
-                    attach_file = "/hass-media/alarm-disarmed.jpg";
+                    title = "Home alarm has been DISARMED";
+                    message = "TODO: add link";
+                    # data = {
+                    #   attach_file = "/hass-media/alarm-disarmed.jpg";
+                    # };
                   };
-                };
-              }
-              {
-                service = "notify.ntfy";
-                data.title = "Home alarm has been DISARMED";
-                data.message = "TODO: add link";
-              }
-              {
+                }{
+                  service = "notify.ntfy";
+                  data.title = "Home alarm has been DISARMED";
+                  data.message = "TODO: add link";
+                  data.data.attach_file = "/hass-media/alarm-disarmed.jpg";
+                }];
+              }{
                 service = "light.turn_off";
                 target.entity_id = "light.camera1_floodlight";
-              }
-              {
+              }{
                 service = "siren.turn_off";
                 target.entity_id = "siren.camera1_siren";
-              }
-              {
+              }{
                 service = "siren.turn_off";
                 target.entity_id = "siren.heiman_siren";
-              }
-              {
+              }{
                 service = "switch.turn_off";
                 target.entity_id = "switch.camera1_email_on_event";
               }];
+            }];
           }
 
         ];
