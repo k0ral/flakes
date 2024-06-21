@@ -41,7 +41,6 @@
       overlays.default = final: prev: import ./packages { pkgs = final; } // {
         hypraise = hypraise.defaultPackage.${system};
         nerdfonts = prev.nerdfonts.override { fonts = [ "VictorMono" ]; };
-        nix-search = nix-search.packages.${system}.nix-search;
       };
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {

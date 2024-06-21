@@ -1,4 +1,4 @@
-{ config, lib, pkgs ? import <nixpkgs> { }, ... }:
+{ config, lib, pkgs ? import <nixpkgs> { }, inputs, ... }:
 with lib;
 
 let
@@ -10,12 +10,11 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      nixfmt
-      nix-search
+      nil
+      nixfmt-classic
+      (inputs.nix-search.packages.${pkgs.system}.nix-search)
       nurl
-      rnix-lsp
       statix
     ];
   };
 }
-

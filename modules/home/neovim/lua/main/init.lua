@@ -103,6 +103,16 @@ lsp.hls.setup {
 lsp.marksman.setup {
   capabilities = capabilities,
 }
+lsp.nil_ls.setup {
+  capabilities = capabilities,
+  settings = {
+    ['nil'] = {
+      formatting = {
+        command = { "nixfmt" }
+      }
+    }
+  }
+}
 lsp.pylsp.setup{
   capabilities = capabilities,
   settings = {
@@ -113,9 +123,6 @@ lsp.pylsp.setup{
       }
     }
   }
-}
-lsp.rnix.setup {
-  capabilities = capabilities,
 }
 
 -- Auto-completion
@@ -163,7 +170,6 @@ local null_ls = require("null-ls")
 local sources = {
   null_ls.builtins.code_actions.statix,
   null_ls.builtins.formatting.jq,
-  null_ls.builtins.formatting.nixfmt,
   null_ls.builtins.formatting.buf,
 }
 
