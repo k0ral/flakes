@@ -35,6 +35,7 @@
     nixlang = ./home/nixlang.nix;
     nushell = ./home/nushell.nix;
     python = ./home/python.nix;
+    s = ./home/s.nix;
     trash = ./home/trash.nix;
     us-qwerty-fr = ./home/us-qwerty-fr.nix;
   };
