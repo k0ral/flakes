@@ -5,7 +5,6 @@
     kooha
     losslesscut-bin
     mkvtoolnix-cli
-    python3Packages.subliminal
   ];
 
   module.video.ffmpeg.enable = true;
