@@ -7,6 +7,7 @@
     obsidian
     shiori
     thunderbird
+    uni
     yewtube
   ];
 
