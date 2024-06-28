@@ -8,6 +8,7 @@
     multimedia = ./home/essential/multimedia.nix;
     nix = ./home/essential/nix.nix;
 
+    clipboard-utils = ./home/wayland/clipboard-utils.nix;
     fuzzel = ./home/wayland/fuzzel.nix;
     i3status-rust = ./home/wayland/i3status-rust.nix;
     hyprland = ./home/wayland/hyprland.nix;

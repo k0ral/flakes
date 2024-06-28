@@ -8,7 +8,6 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      clipboard-utils
       grim
       imv
       lswt
@@ -36,6 +35,7 @@ in {
       XDG_SESSION_TYPE = "wayland";
     };
 
+    module.wayland.clipboard-utils.enable = true;
     module.wayland.fuzzel.enable = true;
     module.wayland.hyprland.enable = true;
     module.wayland.wallit.enable = true;
