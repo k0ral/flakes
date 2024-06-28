@@ -20,11 +20,12 @@
           "${config.home.homeDirectory}/prog/archive"
           "${config.home.homeDirectory}/services"
           "${config.home.homeDirectory}/.gnupg"
-          "${config.home.homeDirectory}/.local/share/shiori"
           "${config.home.homeDirectory}/.mozilla"
           "${config.home.homeDirectory}/.password-store"
           "${config.home.homeDirectory}/.thunderbird"
           "${config.xdg.configHome}"
+          "${config.xdg.dataHome}/buku"
+          "${config.xdg.dataHome}/shiori"
         ];
         repositories = [{
           path = "ssh://17994@ch-s011.rsync.net/./backup";

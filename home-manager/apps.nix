@@ -4,6 +4,7 @@
   home.packages = with pkgs; [
     croc
     logseq
+    buku
     obsidian
     shiori
     thunderbird
