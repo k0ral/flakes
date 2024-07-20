@@ -4,6 +4,14 @@ local global = vim.g
 local map = vim.api.nvim_set_keymap
 local opt = vim.opt
 
+-- Make sure to setup `mapleader` and `maplocalleader` before
+-- loading lazy.nvim so that mappings are correct.
+global.mapleader = '<Space>'
+global.maplocalleader = ','
+
+require("config.lazy")
+require("plugins")
+
 -- General options
 opt.clipboard = 'unnamedplus'
 opt.completeopt = {'menu', 'menuone', 'noselect'}
@@ -25,9 +33,6 @@ opt.tabstop = 2
 opt.termguicolors = true
 opt.undodir = fn.stdpath('config') .. '/undodir'
 opt.undofile = true
-
-global.mapleader = '<Space>'
-global.maplocalleader = ','
 
 -- Colorscheme
 opt.background = 'dark'
@@ -60,19 +65,6 @@ require("aerial").setup({
 
 -- Comment
 require('Comment').setup()
-
--- Fidget
-require("fidget").setup{
-  notification = {
-    override_vim_notify = true
-  }
-}
-
--- Git signs
-require('gitsigns').setup()
-
--- Indent blankline
-require("ibl").setup()
 
 -- Leap
 require('leap').opts.highlight_unlabeled_phase_one_targets = true
@@ -148,20 +140,6 @@ cmp.setup {
   },
 }
 
--- Lualine
-require('lualine').setup {
-  options = { theme = 'material' },
-  sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
-    lualine_c = {{'filename', path = 1}},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
-  },
-  extensions = {'quickfix'}
-}
-
 -- Mini
 require('mini.cursorword').setup()
 
@@ -175,48 +153,6 @@ local sources = {
 
 null_ls.setup({ sources = sources })
 
--- Rainbow
-global.rainbow_active = true
-
--- Telescope
-require("telescope")
-
--- Text-case
-require('textcase').setup()
-
--- Tidy
-require("tidy").setup()
-
--- Tree-sitter
-require('nvim-treesitter.configs').setup {
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = false,
-  },
-  ensure_installed = {
-    "dockerfile",
-    "fish",
-    "go",
-    "html",
-    "java",
-    "json",
-    "lua",
-    "nix",
-    "python",
-    "rust",
-    "terraform",
-    "toml",
-    "yaml",
-  },
-  rainbow = {
-    enable = true,
-    extended_mode = true,
-    max_file_lines = 1000,
-  },
-}
-
 -- Trouble
 require('trouble').setup {
   auto_close = true, -- automatically close the list when you have no diagnostics
@@ -225,9 +161,6 @@ require('trouble').setup {
 -- Undotree
 global.undotree_SetFocusWhenToggle = true
 map('n', '<A-z>', ':UndotreeToggle<CR>', { noremap = true })
-
--- Which-key
-require("which-key").setup()
 
 --
 -- Language-specific
@@ -244,16 +177,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- Go
-require('go').setup()
-
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').goimport()
-  end,
-  group = format_sync_grp,
+-- Nix
+vim.api.nvim_create_autocmd({"BufNewFile", "BufRead"}, {
+  pattern = {"*.nix"},
+  command = "set filetype=nix",
 })
 
 -- Python
@@ -376,3 +303,18 @@ map('v', '<', '<gv', { noremap = true })
 map('v', '>', '>gv', { noremap = true })
 map('v', 'y', 'ygv', { noremap = true })
 map('v', 'y', 'ygv', { noremap = true })
+
+-- Commands
+vim.api.nvim_create_user_command('LspCapabilities', function(opts) print(vim.inspect(vim.lsp.buf_get_clients()[1].server_capabilities)) end, {})
+vim.api.nvim_create_user_command('LspCodeActions', function(opts) vim.lsp.buf.code_action() end, {})
+vim.api.nvim_create_user_command('LspDefinitions', 'Telescope lsp_definitions', {})
+vim.api.nvim_create_user_command('LspDocumentSymbols', 'Telescope lsp_document_symbols', {})
+vim.api.nvim_create_user_command('LspFormat', function(opts) vim.lsp.buf.format({ async = false }) end, {})
+vim.api.nvim_create_user_command('LspHover', function(opts) vim.lsp.buf.hover() end, {})
+vim.api.nvim_create_user_command('LspImplementations', 'Telescope lsp_implementations', {})
+vim.api.nvim_create_user_command('LspRename', function(opts) vim.lsp.buf.rename() end, {})
+vim.api.nvim_create_user_command('LspReferences', 'Telescope lsp_references', {})
+vim.api.nvim_create_user_command('LspSignatureHelp', function(opts) vim.lsp.buf.signature_help() end, {})
+vim.api.nvim_create_user_command('LspTypeDefinition', function(opts) vim.lsp.buf.type_definition() end, {})
+vim.api.nvim_create_user_command('LspWorkspaceSymbols', 'Telescope lsp_workspace_symbols', {})
+vim.api.nvim_create_user_command('FileTypes', 'Telescope filetypes', {})
