@@ -15,7 +15,7 @@
           "${config.home.homeDirectory}/flakes"
           "${config.home.homeDirectory}/foundry"
           "${config.home.homeDirectory}/images"
-          "${config.home.homeDirectory}/logseq"
+          "${config.home.homeDirectory}/obsidian"
           "${config.home.homeDirectory}/papers"
           "${config.home.homeDirectory}/prog/archive"
           "${config.home.homeDirectory}/services"

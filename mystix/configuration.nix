@@ -44,7 +44,7 @@
       # encode-sans
       font-awesome
       libre-baskerville
-      nerdfonts
+      (nerdfonts.override { fonts = ["VictorMono"]; })
       # noto-fonts
       # google-fonts
       # source-han-sans

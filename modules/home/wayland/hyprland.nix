@@ -1,8 +1,9 @@
-{ config, lib, pkgs ? import <nixpkgs> { }, ... }:
+{ config, lib, pkgs ? import <nixpkgs> { }, inputs, ... }:
 with lib;
 
 let
   cfg = config.module.wayland.hyprland;
+  hypraise = inputs.hypraise.defaultPackage.${pkgs.system};
   run_cmus = pkgs.writeScript "run_cmus" ''
     #!${pkgs.nushell}/bin/nu
 
@@ -18,8 +19,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [ hyprutils ];
-
     wayland.windowManager.hyprland = {
       enable = true;
       xwayland.enable = false;
@@ -81,15 +80,15 @@ in
           ''$mod, E, exec, rofimoji --action type copy --selector fuzzel --selector-args="" --clipboarder wl-copy --typer wtype''
           ''$mod, F, togglefloating, active''
           ''$mod, F, pin, active''
-          ''$mod SHIFT, F, exec, ${pkgs.hypraise}/bin/raise --class firefox --launch firefox''
+          ''$mod SHIFT, F, exec, ${hypraise}/bin/raise --class firefox --launch firefox''
           "$mod, L, exec, swaylock --screenshots --clock --indicator --effect-blur 20x5 --effect-vignette 0.5:0.5 --grace 2 --fade-in 2"
-          ''$mod SHIFT, L, exec, ${pkgs.hypraise}/bin/raise --class Logseq --launch logseq''
           "$mod, M, exec, ${run_cmus}"
           "$mod, M, togglespecialworkspace, cmus"
           ''$mod, O, exec, foot -a navi sh -c "sleep 0.01 && navi --tag-rules=bookmark"''
+          ''$mod SHIFT, O, exec, ${hypraise}/bin/raise --class obsidian --launch obsidian''
           ''$mod, P, exec, /bin/sh -c '$(sort ~/.config/wayland/commands | ${pkgs.wmenu}/bin/wmenu -f "Victor Mono Nerd Font 16" -l10 -p "command:")' ''
           "$mod, R, exec, fuzzel"
-          ''$mod SHIFT, T, exec, ${pkgs.hypraise}/bin/raise --class thunderbird --launch thunderbird''
+          ''$mod SHIFT, T, exec, ${hypraise}/bin/raise --class thunderbird --launch thunderbird''
 
           "$mod, 1, workspace, 1"
           "$mod, 2, workspace, 2"
@@ -114,6 +113,7 @@ in
           "workspace special:cmus, class:^(cmus)$"
           "workspace special:navi, class:^(navi)$"
           "workspace name:logseq, class:^(Logseq)$"
+          "workspace name:obsidian, class:^(obsidian)$"
           "workspace name:thunderbird, class:^(thunderbird)$"
         ];
       };

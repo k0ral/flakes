@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = inputs@{ self, home-manager, nixos-hardware, nixpkgs, nix-search, sops-nix, hypraise }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
       user_id = 1000;
@@ -38,10 +38,7 @@
 
       modules = import ./modules;
 
-      overlays.default = final: prev: import ./packages { pkgs = final; } // {
-        hypraise = hypraise.defaultPackage.${system};
-        nerdfonts = prev.nerdfonts.override { fonts = [ "VictorMono" ]; };
-      };
+      overlays.default = final: prev: import ./packages { pkgs = final; };
 
       nixosConfigurations.mystix = nixpkgs.lib.nixosSystem {
         inherit system;
