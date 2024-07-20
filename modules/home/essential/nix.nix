@@ -11,6 +11,7 @@ in {
     home.packages = with pkgs; [
       cachix
       nix-tree
+      nvd
     ];
 
     nixpkgs.config = {

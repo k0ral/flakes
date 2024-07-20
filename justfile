@@ -1,5 +1,6 @@
 build:
   sudo nixos-rebuild build --flake .#mystix
+  nvd diff /run/current-system ./result
 switch:
   sudo nixos-rebuild switch --flake .#mystix
 deploy-regis:
