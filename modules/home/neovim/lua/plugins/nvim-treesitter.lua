@@ -14,6 +14,8 @@ return { {
       ensure_installed = {
         "dockerfile",
         "go",
+        "gomod",
+        "gosum",
         "html",
         "java",
         "json",
