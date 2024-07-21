@@ -10,6 +10,7 @@ in {
 
     config = mkIf cfg.enable {
     home.packages = with pkgs; [
+      efm-langserver
       neovim
       gcc # Only for tree-sitter
     ];
@@ -18,6 +19,7 @@ in {
       "nvim/init.lua".source = ./init.lua;
       "nvim/lua/config/lazy.lua".source = ./lua/config/lazy.lua;
       "nvim/lua/plugins/init.lua".source = ./lua/plugins/init.lua;
+      "nvim/lua/plugins/efm-langserver.lua".source = ./lua/plugins/efm-langserver.lua;
       "nvim/lua/plugins/go.lua".source = ./lua/plugins/go.lua;
       "nvim/lua/plugins/lualine.lua".source = ./lua/plugins/lualine.lua;
       "nvim/lua/plugins/nvim-treesitter.lua".source = ./lua/plugins/nvim-treesitter.lua;

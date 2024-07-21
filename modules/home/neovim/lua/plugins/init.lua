@@ -38,7 +38,6 @@ return {
   { 'mrcjkb/rustaceanvim', version = '^4', ft = { 'rust' } },
   "neovim/nvim-lspconfig",
   "neovimhaskell/haskell-vim",
-  "nvimtools/none-ls.nvim",
   "numToStr/Comment.nvim",
   "nvim-lua/popup.nvim",
   { "nvim-telescope/telescope.nvim", dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },

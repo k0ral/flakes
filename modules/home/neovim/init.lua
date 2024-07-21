@@ -143,21 +143,6 @@ cmp.setup {
 -- Mini
 require('mini.cursorword').setup()
 
--- Null-ls
-local null_ls = require("null-ls")
-local sources = {
-  null_ls.builtins.code_actions.statix,
-  null_ls.builtins.formatting.jq,
-  null_ls.builtins.formatting.buf,
-}
-
-null_ls.setup({ sources = sources })
-
--- Trouble
-require('trouble').setup {
-  auto_close = true, -- automatically close the list when you have no diagnostics
-}
-
 -- Undotree
 global.undotree_SetFocusWhenToggle = true
 map('n', '<A-z>', ':UndotreeToggle<CR>', { noremap = true })
