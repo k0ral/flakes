@@ -11,8 +11,8 @@ return {
     "j-hui/fidget.nvim",
     opts = {
       notification = {
-        override_vim_notify = true
-      }
+        override_vim_notify = true,
+      },
     },
   },
   {
@@ -31,7 +31,7 @@ return {
   {
     "mcauley-penney/tidy.nvim",
     opts = {
-        filetype_exclude = { "markdown", "diff" }
+      filetype_exclude = { "markdown", "diff" },
     },
   },
   "mickael-menu/zk-nvim",
@@ -40,7 +40,7 @@ return {
   "neovimhaskell/haskell-vim",
   "numToStr/Comment.nvim",
   "nvim-lua/popup.nvim",
-  { "nvim-telescope/telescope.nvim", dependencies = { 'nvim-lua/plenary.nvim' }, opts = {} },
+  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
   "marko-cerovac/material.nvim",
   "purescript-contrib/purescript-vim",
   "romgrk/barbar.nvim",

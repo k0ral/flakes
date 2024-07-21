@@ -30,6 +30,7 @@
     haskell = ./home/haskell.nix;
     kubernetes = ./home/kubernetes.nix;
     librewolf = ./home/librewolf.nix;
+    lua = ./home/lua.nix;
     mpv = ./home/mpv.nix;
     ncmpcpp = ./home/ncmpcpp.nix;
     neovim = ./home/neovim/default.nix;

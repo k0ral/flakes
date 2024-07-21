@@ -39,6 +39,7 @@
   module.dev.containers.enable = true;
   module.dev.golang.enable = true;
   module.dev.haskell.enable = true;
+  module.dev.lua.enable = true;
   module.dev.neovim.enable = true;
   module.dev.nixlang.enable = true;
   module.dev.python.enable = true;

@@ -1,4 +1,5 @@
-return { {
+return {
+  {
     "ray-x/go.nvim",
     config = function()
       require("go").setup()
@@ -7,11 +8,12 @@ return { {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
         callback = function()
-          require('go.format').goimports()
+          require("go.format").goimports()
         end,
         group = format_sync_grp,
       })
     end,
-    event = {"CmdlineEnter"},
-    ft = {"go", 'gomod'},
-} }
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+  },
+}
