@@ -61,9 +61,6 @@ require("aerial").setup({
   open_automatic = true,
 })
 
--- Comment
-require("Comment").setup()
-
 -- Leap
 require("leap").opts.highlight_unlabeled_phase_one_targets = true
 
@@ -218,9 +215,9 @@ map("", "<A-Left>", "<Home>", { noremap = true })
 map("i", "<A-Left>", "<Home>", { noremap = true })
 map("", "<A-Right>", "<End>", { noremap = true })
 map("i", "<A-Right>", "<End>", { noremap = true })
-map("n", "<A-c>", "<Plug>(comment_toggle_linewise_current)", {})
-map("i", "<A-c>", "<C-o><Plug>(comment_toggle_linewise_current)", {})
-map("v", "<A-c>", "<Plug>(comment_toggle_linewise_visual)", {})
+map("n", "<A-c>", "gcc", {})
+map("i", "<A-c>", "<C-o>gcc", {})
+map("v", "<A-c>", "gc", {})
 map("n", "<A-h>", ":LspHover<CR>", { noremap = true })
 map("i", "<A-h>", "<C-o>:LspHover<CR>", { noremap = true })
 map("n", "<A-n>", "*", { noremap = true })

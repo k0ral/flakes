@@ -34,7 +34,6 @@ return {
   },
   "mickael-menu/zk-nvim",
   "neovimhaskell/haskell-vim",
-  "numToStr/Comment.nvim",
   "nvim-lua/popup.nvim",
   { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
   "marko-cerovac/material.nvim",
