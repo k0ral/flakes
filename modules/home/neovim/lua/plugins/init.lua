@@ -22,7 +22,6 @@ return {
       require("telescope").load_extension("textcase")
     end,
   },
-  "L3MON4D3/LuaSnip",
   { "lewis6991/gitsigns.nvim", opts = {} },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
   "mbbill/undotree",

@@ -23,6 +23,7 @@ in {
       "nvim/lua/plugins/lspconfig.lua".source = ./lua/plugins/lspconfig.lua;
       "nvim/lua/plugins/lualine.lua".source = ./lua/plugins/lualine.lua;
       "nvim/lua/plugins/nvim-treesitter.lua".source = ./lua/plugins/nvim-treesitter.lua;
+      "nvim/lua/plugins/snippets.lua".source = ./lua/plugins/snippets.lua;
       "nvim/lua/plugins/telescope.lua".source = ./lua/plugins/telescope.lua;
     };
   };
