@@ -1,7 +1,6 @@
 return {
   "andymass/vim-matchup",
   "echasnovski/mini.nvim",
-  "folke/trouble.nvim",
   "folke/which-key.nvim",
   "ggandor/leap.nvim",
   "hrsh7th/nvim-cmp",

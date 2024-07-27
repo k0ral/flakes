@@ -46,7 +46,6 @@ require("material").setup({
     "mini",
     "nvim-web-devicons",
     "telescope",
-    "trouble",
     "which-key",
   },
   lualine_style = "stealth",
@@ -152,6 +151,8 @@ map("n", "<C-b>", "<cmd>Telescope buffers<CR>", {})
 map("i", "<C-b>", "<C-o><cmd>Telescope buffers<CR>", {})
 map("n", "<C-c>", "<Esc>", { noremap = true })
 map("i", "<C-c>", "<Esc>", { noremap = true })
+map("n", "<C-d>", ":DiagnosticOpenFloat<CR>", {})
+map("i", "<C-d>", "<C-o>:DiagnosticOpenFloat<CR>", {})
 map("n", "<C-e>", "<End>", { noremap = true })
 map("i", "<C-e>", "<End>", { noremap = true })
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>", {})
@@ -246,6 +247,9 @@ map("v", "y", "ygv", { noremap = true })
 map("v", "y", "ygv", { noremap = true })
 
 -- Commands
+vim.api.nvim_create_user_command("DiagnosticOpenFloat", function(opts)
+  vim.diagnostic.open_float()
+end, {})
 vim.api.nvim_create_user_command("LspCapabilities", function(opts)
   print(vim.inspect(vim.lsp.buf_get_clients()[1].server_capabilities))
 end, {})
