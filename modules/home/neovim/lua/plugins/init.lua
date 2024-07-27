@@ -35,7 +35,6 @@ return {
   "mickael-menu/zk-nvim",
   "neovimhaskell/haskell-vim",
   "nvim-lua/popup.nvim",
-  { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" }, opts = {} },
   "marko-cerovac/material.nvim",
   "purescript-contrib/purescript-vim",
   "romgrk/barbar.nvim",
