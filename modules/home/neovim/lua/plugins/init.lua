@@ -35,8 +35,6 @@ return {
     },
   },
   "mickael-menu/zk-nvim",
-  { 'mrcjkb/rustaceanvim', version = '^4', ft = { 'rust' } },
-  "neovim/nvim-lspconfig",
   "neovimhaskell/haskell-vim",
   "numToStr/Comment.nvim",
   "nvim-lua/popup.nvim",
