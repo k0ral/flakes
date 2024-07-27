@@ -143,9 +143,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- TeX
-global.tex_flavor = "latex"
-
 --
 -- Key bindings
 --
